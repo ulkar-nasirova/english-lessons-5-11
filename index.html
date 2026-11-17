@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#151530">
+<title>English 5–11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+  :root{
+    --bg:#151530; --bg2:#1e1e42; --card:#24244f; --line:#34346a;
+    --text:#f3f3ff; --muted:#a9a9cf;
+    --yellow:#f2c94c; --teal:#3cc4b4; --coral:#ef7a6a; --lime:#8fd16a;
+    --pink:#f0a6b8; --orange:#f2a65a; --violet:#7c5cf0; --green:#2fb36b;
+    --ok:#2fd27a; --bad:#ff5d6c; --r:18px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  body{min-height:100vh}
+  button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+  a{color:inherit}
+  .wrap{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+  h1,h2,h3{margin:0;font-weight:900;letter-spacing:.2px}
+  p{margin:0}
+  .muted{color:var(--muted)}
+
+  .top{display:flex;align-items:center;gap:12px;margin:4px 0 12px}
+  .logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--violet),var(--teal));font-size:22px;font-weight:900}
+  .top h1{font-size:22px}
+  .top small{display:block;color:var(--muted);font-weight:700;font-size:13px}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .me{display:inline-flex;align-items:center;gap:6px;background:#dff3ff;color:#173a5c;border-radius:999px;padding:7px 14px;font-weight:900;font-size:14px}
+  .me.alt{background:#e9e4ff;color:#3a2a8a}
+
+  .hero{background:linear-gradient(135deg,#2b2370,#1f4f7a);border-radius:22px;padding:20px;position:relative;overflow:hidden;margin-bottom:14px}
+  .hero h2{font-size:20px;line-height:1.25;max-width:70%}
+  .hero p{margin-top:8px;color:#d6d6ff;font-weight:700;font-size:14px;max-width:72%}
+  .hero .big{position:absolute;right:-6px;bottom:-18px;font-size:92px;opacity:.9;transform:rotate(-8deg)}
+
+  .note{background:#c9f0e4;color:#13342b;border-radius:20px;padding:14px 16px;margin-bottom:14px;font-weight:800;font-size:16px;line-height:1.4;
+    background-image:radial-gradient(rgba(19,52,43,.12) 1px,transparent 1px);background-size:14px 14px}
+  .note small{display:inline-block;background:#1f8a6a;color:#fff;border-radius:99px;padding:4px 12px;margin-bottom:8px;font-size:12.5px}
+
+  /* grade covers */
+  .covers{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  .gcard{border-radius:18px;padding:7px 7px 10px;text-align:center;border:2px solid rgba(255,255,255,.12)}
+  .gcard .cover{border-radius:12px;aspect-ratio:5/7;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:6px;text-align:left}
+  .gcard .cover b{font-size:11px;font-weight:900;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .gcard .cover i{font-style:normal;font-size:26px;font-weight:900;color:#fff;line-height:1;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+  .gcard .cover s{text-decoration:none;position:absolute;right:4px;top:18px;font-size:18px;transform:rotate(12deg)}
+  .gcard .cover u{text-decoration:none;font-size:7.5px;font-weight:900;color:rgba(255,255,255,.9);letter-spacing:.6px}
+  .gcard .lbl{margin-top:6px;font-weight:900;font-size:13px}
+  .gcard .lbl em{font-style:normal;font-size:22px;margin-right:2px}
+  .gcard .go{margin:4px auto 0;width:28px;height:28px;border-radius:50%;background:#151530;display:grid;place-items:center;font-weight:900;font-size:14px}
+  .gcard.locked{opacity:.45;filter:grayscale(.6)}
+  .gcard.all .cover{background:#fde9d7;align-items:center;justify-content:center;text-align:center}
+  .gcard.all .cover i{color:#f2a65a;font-size:15px;text-shadow:none}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .tile{position:relative;overflow:hidden;border-radius:var(--r);padding:14px;min-height:108px;text-align:left;display:flex;flex-direction:column;justify-content:space-between;color:#1b1b33;box-shadow:0 6px 0 rgba(0,0,0,.25);transition:transform .12s}
+  .tile:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.25)}
+  .tile::after{content:"";position:absolute;right:-26px;top:-26px;width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.28)}
+  .tile h3{font-size:21px;position:relative;z-index:1;line-height:1.1}
+  .tile .sub{font-size:12.5px;font-weight:800;opacity:.78;position:relative;z-index:1}
+  .tile.wide{grid-column:1/-1;min-height:92px}
+  .tile.locked{filter:grayscale(.75);opacity:.45}
+  .tile.locked .sub::before{content:"🔒 "}
+  .c-yellow{background:var(--yellow)} .c-teal{background:var(--teal)} .c-coral{background:var(--coral)}
+  .c-lime{background:var(--lime)} .c-pink{background:var(--pink)} .c-orange{background:var(--orange)}
+  .c-violet{background:var(--violet);color:#fff} .c-green{background:var(--green);color:#fff}
+  .c-red{background:#e04a5a;color:#fff} .c-lav{background:#e7e2ff;color:#3b2a8a} .c-sky{background:#93c8f3}
+  .c-peach{background:#fcd9c4} .c-magenta{background:#ec5ea8;color:#fff} .c-wine{background:#3a2430;color:#ef8b7a;border:2px solid #b85b55}
+  .c-blue{background:#5b8def;color:#fff}
+
+  .row{display:flex;align-items:center;gap:14px;width:100%;border-radius:var(--r);padding:13px 16px;margin-top:12px;text-align:left;color:#1b1b33;box-shadow:0 5px 0 rgba(0,0,0,.25);text-decoration:none;border:2px solid rgba(0,0,0,.08)}
+  .row:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+  .row .ic{font-size:26px;flex:none}
+  .row b{display:block;font-size:17px;font-weight:900}
+  .row span{font-size:12.5px;font-weight:700;opacity:.82}
+  .row .arr{margin-left:auto;font-weight:900;font-size:20px;flex:none}
+  .badge{margin-left:auto;flex:none;border-radius:99px;padding:4px 10px;font-size:11px!important;font-weight:900!important;letter-spacing:.6px;opacity:1!important}
+  .gram{background:linear-gradient(135deg,#7a55d6,#5532a8);color:#fff;border:3px solid #cdbbff;border-radius:24px;padding:20px 18px}
+  .gram b{font-size:24px}
+  .send{background:#25a55a;color:#fff;justify-content:center;font-weight:900;font-size:18px;border-radius:20px}
+
+  .sec-title{margin:22px 0 4px;font-size:22px}
+  .sec-desc{color:var(--muted);font-weight:700;font-size:14px;margin-bottom:12px;line-height:1.45}
+  .nav{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+  .pill{border:2px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:800;font-size:14px;background:var(--bg2)}
+  .pill.home{background:var(--yellow);border-color:var(--yellow);color:#1b1b33}
+  .seg{display:flex;background:var(--bg2);border-radius:14px;padding:5px;margin:4px 0 14px;border:1px solid var(--line)}
+  .seg button{flex:1;padding:10px;border-radius:10px;font-weight:900;color:var(--muted)}
+  .seg button.on{background:var(--teal);color:#0f2a27}
+
+  .gbanner{border-radius:24px;padding:18px;margin-bottom:16px;background:linear-gradient(160deg,#20b2c4 0%,#20b2c4 55%,#f6c2bd 56%);position:relative;overflow:hidden}
+  .gbanner::before{content:"";position:absolute;left:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:repeating-radial-gradient(circle,#f2a65a 0 14px,#f6c94c 14px 28px);opacity:.9}
+  .gbanner .tag{position:relative;display:inline-block;background:#1b1b45;color:#f6c94c;font-weight:900;border-radius:10px;padding:4px 10px;font-size:14px;letter-spacing:1px}
+  .gbanner h2{position:relative;font-size:34px;color:#f6c94c;text-shadow:0 3px 0 #e2602c,0 5px 0 #1b1b45;margin:8px 0 6px;letter-spacing:.5px}
+  .gbanner .vb{position:relative;display:inline-block;background:#1b1b45;color:#fff;border-radius:10px;padding:6px 14px;font-weight:900;letter-spacing:4px;font-size:14px}
+  .gbanner small{position:relative;display:block;margin-top:10px;color:#1b1b45;font-weight:800;font-size:12.5px}
+
+  .word{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:14px;padding:12px 14px;margin-bottom:8px}
+  .word .en{font-weight:900;font-size:17px}
+  .word .en small{font-weight:700;color:#b9b2ff;font-size:13px;margin-left:4px}
+  .word .az{color:var(--muted);font-weight:700;font-size:14px}
+  .word .ex{color:#c9c9f2;font-size:13px;font-style:italic;margin-top:3px}
+  .word .tag{display:inline-block;margin-top:4px;background:var(--bg2);border-radius:8px;padding:2px 8px;font-size:11.5px;font-weight:800;color:#c9c9f2}
+  .spk{margin-left:auto;flex:none;width:38px;height:38px;border-radius:50%;background:var(--bg2);border:2px solid var(--line);display:grid;place-items:center;font-size:16px}
+  [data-say]{cursor:pointer}
+
+  .qhead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .qhead h2{font-size:19px;color:var(--yellow)}
+  .bar{flex:1;height:10px;background:var(--bg2);border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--lime));width:0;transition:width .3s}
+  .stats{display:flex;gap:8px;font-weight:900;margin:8px 0 12px;font-size:14px}
+  .stats span{background:var(--bg2);border-radius:10px;padding:4px 10px}
+  .stats .g{color:var(--ok)} .stats .r{color:var(--bad)}
+  .qcard{border:2px solid #4a4a8a;border-radius:22px;padding:20px 16px;text-align:center;background:var(--bg2);margin-bottom:14px}
+  .qcard .lbl{letter-spacing:2px;font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase}
+  .qcard .w{font-size:30px;font-weight:900;margin:8px 0 4px;word-break:break-word;line-height:1.2}
+  .qcard .w.md{font-size:21px}
+  .qcard .pos{font-size:12px;color:var(--muted);font-weight:800}
+  .qcard .sent{margin-top:12px;font-size:15px;color:#dcdcff}
+  .qcard mark{background:none;color:var(--coral);font-weight:900}
+  .play{margin:10px auto 0;width:48px;height:48px;border-radius:50%;background:var(--coral);display:grid;place-items:center;font-size:20px;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:2px solid #4a4a8a;background:var(--bg);border-radius:16px;padding:13px 14px;margin-bottom:10px;font-weight:800;font-size:16px;transition:background .15s,border-color .15s}
+  .opt .k{flex:none;width:28px;height:28px;border-radius:50%;background:var(--yellow);color:#1b1b33;display:grid;place-items:center;font-weight:900;font-size:13px}
+  .opt.ok{background:rgba(47,210,122,.18);border-color:var(--ok)}
+  .opt.bad{background:rgba(255,93,108,.18);border-color:var(--bad)}
+  .opt:disabled{cursor:default}
+  .btn{display:block;width:100%;padding:15px;border-radius:16px;font-weight:900;font-size:17px;text-align:center;box-shadow:0 5px 0 rgba(0,0,0,.25);margin-top:10px;text-decoration:none}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+  .btn.orange{background:var(--orange);color:#2a1606}
+  .btn.green{background:#25d366;color:#06301a}
+  .btn.lime{background:var(--lime);color:#15300a}
+  .btn.violet{background:#9b8cff;color:#fff}
+  .btn.teal{background:#1f8f97;color:#fff}
+  .btn.ghost{background:var(--bg2);border:2px solid var(--line);box-shadow:none}
+  .idk{display:block;margin:4px auto 0;background:#fde7a6;color:#3b2c00;border-radius:999px;padding:9px 18px;font-weight:900;font-size:14px}
+
+  .flip{perspective:1000px;height:260px;margin:6px 0 14px}
+  .flip .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+  .flip.on .in{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
+  .face.front{background:linear-gradient(135deg,var(--violet),#5b8def)}
+  .face.back{background:linear-gradient(135deg,var(--teal),#2f8f86);transform:rotateY(180deg)}
+  .face .w{font-size:32px;font-weight:900}
+  .face .h{margin-top:8px;font-size:13px;font-weight:800;opacity:.85}
+  .face .ex{margin-top:12px;font-size:15px;font-style:italic}
+  .fcnav{display:flex;gap:10px} .fcnav .btn{margin-top:0}
+
+  .result{text-align:center;padding:20px 0}
+  .result .emoji{font-size:64px}
+  .result .score{font-size:44px;font-weight:900;margin:6px 0}
+  .result p{font-weight:700;color:var(--muted)}
+  .empty{text-align:center;color:var(--muted);font-weight:700;padding:30px 10px;background:var(--bg2);border-radius:18px}
+  .foot{margin-top:28px;text-align:center;color:#7d7db0;font-size:12.5px;font-weight:700;line-height:1.5}
+
+  /* flashcards (light) */
+  .cnav{border-color:#f3ece6;padding:9px 18px;font-size:16px} .cnav2{padding:9px 18px;font-size:16px}
+  .chead{display:flex;align-items:center;gap:14px;margin:6px 0 10px}
+  .ctitle{background:#1e1e42;color:#f6c94c;font-weight:900;font-size:22px;border-radius:14px;padding:8px 14px;white-space:nowrap}
+  .cbar{flex:1;height:14px;border:2px solid #f3ece6;border-radius:99px;overflow:hidden} .cbar i{display:block;height:100%;background:#f6c94c}
+  .cstats{display:flex;align-items:center;gap:12px;margin-bottom:12px} .cstats b{font-size:20px}
+  .cknown{background:#1f4d2e;color:#fff;font-weight:900;border-radius:99px;padding:5px 14px;font-size:18px}
+  .flip.lc{height:400px}
+  .flip:not(.on) .face.back,.flip:not(.on) .face.cback,.flip.on .face.front,.flip.on .face.cfront{pointer-events:none}
+  .face.cfront,.face.cback{background:#f1eefe;border:4px solid #7c5cc9;color:#3b2a8a;justify-content:center}
+  .face.cback{background:#e8f7f3;border-color:#2f9d8a;color:#174d43;transform:rotateY(180deg)}
+  .cchip{position:absolute;left:16px;top:16px;background:#fff;border-radius:99px;padding:5px 14px;font-weight:900;font-size:15px;color:#3b2a8a}
+  .cst{position:absolute;right:18px;top:20px;font-weight:900;font-size:15px}
+  .cw{font-size:44px;font-weight:900;color:#5a3fb8;line-height:1.1;word-break:break-word}
+  .cback .cw{color:#16685a}
+  .cipa{color:#a9a3cf;font-size:20px;font-weight:700;margin-top:8px}
+  .cspk{margin-top:16px;width:62px;height:62px;border-radius:50%;border:3px solid #3f9488;background:transparent;font-size:24px;display:grid;place-items:center}
+  .chint{margin-top:16px;color:#b3add6;font-weight:800;font-size:15px}
+  .cru{color:#4c8b80;font-weight:800;font-size:17px;margin-top:6px}
+  .cex{margin-top:14px;font-size:16px;font-weight:700;color:#24584f;line-height:1.4}
+  .cex mark{background:none;color:#e0603c;font-weight:900}
+  .cbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .cb{border-radius:99px;padding:15px 10px;font-weight:900;font-size:18px;box-shadow:0 5px 0 rgba(0,0,0,.25)}
+  .cb:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.25)}
+  .cb.rep{background:#e0a100;color:#fff} .cb.ok{background:#2fa84f;color:#fff}
+  .cb.prev{background:#6e6f8c;color:#1b1b33} .cb.prev:disabled{opacity:.6}
+  .cb.next{background:#fff;color:#1b1b33}
+  .ctask{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;background:#f1eefe;color:#3b2a8a;border:3px solid #cfc4f5;border-radius:18px;padding:14px 16px;margin-bottom:10px}
+  .ctask b{display:block;font-size:19px} .ctask span{font-size:13.5px;font-weight:800;opacity:.75}
+  .ctask em{font-style:normal;font-weight:900;background:#fff;border-radius:99px;padding:5px 12px}
+  .ctask.done{background:#dce8ff;border-color:#5b8def;color:#1f3f8a}
+  .ctask.done em{background:#5b8def;color:#fff}
+  /* make up sentences */
+  .mkhead{display:flex;align-items:center;gap:14px;margin:6px 0 10px}
+  .mkhead .ctitle{font-size:24px}
+  .mkhead b{font-size:20px;white-space:nowrap}
+  .mkcard{border:4px solid #f3ece6;border-radius:28px;background:#1e2152;padding:18px 16px;text-align:center;margin:12px 0 16px}
+  .mkcard .lbl{letter-spacing:2px;font-weight:900;color:#b7b9e8;font-size:15px}
+  .mkslot{min-height:84px;border:3px dashed #3b3f7a;border-radius:22px;margin:14px 0 6px;padding:10px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center}
+  .mkslot .ph{color:#b7b9e8;font-weight:800;font-size:19px}
+  .mkslot.ok{border-color:#2fd27a;background:#1d4a2c}
+  .mkslot.bad{border-color:var(--bad);background:#4a1f2c}
+  .mkhint{color:#c9cbf0;font-weight:800;font-size:18px;line-height:1.45;margin-top:10px}
+  .mkchips{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .mkc{background:#1e2152;border:3px solid #f3ece6;border-radius:18px;padding:12px 18px;font-weight:900;font-size:19px;color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+  .mkc.used{opacity:.3;border-color:#6d6f99;box-shadow:none}
+  .mkbtns{display:flex;gap:10px;justify-content:center;margin-top:16px}
+  .mkb{border:3px solid #f3ece6;border-radius:99px;padding:11px 22px;font-weight:900;font-size:17px;background:#1e2152}
+  .mkok{text-align:center;color:#2fd27a;font-weight:900;font-size:24px;margin-top:8px}
+  .mkbad{text-align:center;color:var(--bad);font-weight:900;font-size:19px;margin-top:8px}
+  .mksent{display:flex;align-items:center;gap:12px;margin-top:10px;font-weight:900;font-size:20px;line-height:1.35}
+  .mksent span{flex:1;text-align:center}
+  .best{display:inline-block;background:#1b1b45;color:#f6c94c;border-radius:99px;padding:4px 10px;font-weight:900;font-size:12.5px;margin-left:4px}
+  /* make up */
+  .slot{min-height:64px;background:#11112a;border:2px dashed var(--line);border-radius:16px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:6px}
+  .chip{background:var(--card);border:2px solid #4a4a8a;border-radius:12px;padding:9px 13px;font-weight:900;font-size:16px}
+  .slot .chip{background:#2a2a5c;border-color:#6a6ab0}
+  .chip.used{visibility:hidden}
+  .slot.ok{border-color:var(--ok);background:rgba(47,210,122,.12)}
+  .slot.bad{border-color:var(--bad);background:rgba(255,93,108,.12)}
+  .fix{background:rgba(47,210,122,.15);border:2px solid var(--ok);border-radius:14px;padding:12px;font-weight:800;margin-top:8px}
+
+  /* reading */
+  .text{background:var(--bg2);border:2px solid var(--line);border-radius:20px;padding:16px;font-size:16.5px;line-height:1.65;margin-bottom:12px}
+
+  /* dict */
+  .chipsel{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .chipsel button{background:#fff;color:#3b2a8a;border-radius:999px;padding:9px 14px;font-weight:900;font-size:14px;border:2px solid #e3dcff}
+  .chipsel button.on{background:#5b4de6;color:#fff;border-color:#5b4de6}
+  .dict{border:2px solid var(--line);border-radius:18px;overflow:hidden}
+  .drow{padding:11px 14px;display:flex;align-items:center;gap:10px}
+  .drow:nth-child(even){background:#1b1b40}
+  .drow .en{font-weight:900;font-size:17px}
+  .drow .en small{font-weight:700;color:#b9b2ff;font-size:13px}
+  .drow .tr{color:var(--muted);font-weight:700;font-size:14px}
+  #printArea{display:none}
+
+  /* forms */
+  .reg{background:var(--bg2);border:2px solid var(--line);border-radius:26px;padding:22px 20px;margin-top:6px}
+  .reg h2{font-size:28px}
+  .reg .lead{color:var(--muted);font-weight:700;font-size:15px;line-height:1.5;margin:8px 0 6px}
+  .reg label{display:block;font-weight:900;font-size:16px;margin:16px 0 8px}
+  .field{display:flex;align-items:center;gap:12px;background:#11112a;border:2px solid var(--line);border-radius:16px;padding:0 16px}
+  .field:focus-within{border-color:#9b8cff}
+  .field input{flex:1;min-width:0;background:transparent;border:0;outline:none;color:var(--text);font:inherit;font-weight:800;font-size:18px;padding:15px 0}
+  .field input::placeholder,textarea::placeholder{color:#62628f}
+  .field .pre{font-weight:900;font-size:18px}
+  textarea{width:100%;min-height:220px;background:#11112a;border:2px solid var(--line);border-radius:16px;padding:14px;color:var(--text);font:inherit;font-weight:700;font-size:16px;line-height:1.55;outline:none;resize:vertical}
+  textarea:focus{border-color:#9b8cff}
+  .roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .roles button{border:2px solid var(--line);background:#11112a;border-radius:16px;padding:15px 8px;font-weight:900;font-size:17px}
+  .roles button.on{background:#9b8cff;border-color:#9b8cff;color:#fff}
+  .err{color:var(--bad);font-weight:800;font-size:14px;margin-top:12px}
+  .privacy{color:#7d7db0;font-size:12.5px;font-weight:700;text-align:center;margin-top:12px}
+  .search{display:flex;align-items:center;gap:10px;background:#11112a;border:2px solid var(--line);border-radius:16px;padding:0 14px;margin-bottom:12px}
+  .search input{flex:1;min-width:0;background:transparent;border:0;outline:none;color:var(--text);font:inherit;font-weight:800;font-size:17px;padding:14px 0}
+
+  /* paragraph */
+  .phead{background:#1f8f97;color:#fff;border-radius:16px;padding:14px 16px;font-weight:900;font-size:18px;line-height:1.35;margin-bottom:12px}
+  details{background:var(--bg2);border:2px solid #2b7f86;border-radius:16px;margin-bottom:10px;overflow:hidden}
+  summary{padding:13px 16px;font-weight:900;color:#7fe0e6;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"▾"} details[open] summary::after{content:"▴"}
+  .plan{padding:0 16px 14px 34px;margin:0;font-size:14.5px;line-height:1.55;font-weight:700;color:#dcdcff}
+  .plan li{margin-bottom:6px} .plan b{color:#ff8f8f}
+  .kw{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 12px}
+  .kw div{background:#11112a;border-radius:12px;padding:9px 11px}
+  .kw b{display:block;color:#7fe0e6;font-size:14.5px} .kw span{font-size:13px;color:var(--muted);font-weight:700}
+  .wc{font-weight:900;font-size:13.5px;margin:8px 0}
+  .checks{background:var(--bg2);border:2px solid var(--line);border-radius:18px;padding:14px 16px;margin-top:12px}
+  .checks h3{text-align:center;font-size:22px;margin-bottom:8px}
+  .checks div{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-weight:800;font-size:14.5px}
+  .checks div:last-child{border:0}
+  .lvl{display:inline-block;background:#11112a;border-radius:8px;padding:2px 8px;font-size:11.5px;font-weight:900;color:#7fe0e6;margin-top:4px}
+
+  /* paragraph builder (warm theme) */
+  body.warm{--bg:#17110e;--bg2:#211814;--card:#241a15;--line:#3d2c22;--muted:#b9a596;background:#17110e}
+  .serif{font-family:Georgia,"Noto Serif","Times New Roman",serif}
+  .phero{background:linear-gradient(135deg,#c8662a,#8f3f12);border-radius:24px;padding:20px 20px;margin-bottom:14px;color:#fff}
+  .phero h2{font-size:30px} .phero p{font-size:15px;font-weight:700;opacity:.92;margin-top:6px}
+  .pnum{flex:none;width:36px;height:36px;border-radius:12px;background:#3a2516;color:#f2a65a;display:grid;place-items:center;font-weight:900}
+  .ptopic{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);border-radius:20px;padding:14px;margin-bottom:10px}
+  .ptopic b{display:block;font-size:17px;line-height:1.3} .ptopic span{font-size:13px;color:var(--muted);font-weight:800}
+  .ptopic.done{border-color:#3e8f55}
+  .qtitle{border-left:6px solid #f2a65a;background:var(--card);border-radius:18px;padding:14px 16px;font-size:21px;font-weight:900;line-height:1.3;margin-bottom:14px}
+  .bcard{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:16px}
+  .bhead{display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:18px}
+  .bhead .st{font-size:16px} .bhead .st b{margin-left:4px;color:var(--muted)}
+  .pbar{height:8px;background:#3a2b22;border-radius:9px;margin:10px 0 14px;overflow:hidden} .pbar i{display:block;height:100%;background:#f28c4a;border-radius:9px}
+  .azbox{border-left:6px solid #f28c4a;background:#3a2417;border-radius:14px;padding:12px 14px;margin-bottom:12px}
+  .azbox small{display:block;color:#f2a65a;font-weight:900;letter-spacing:1.5px;font-size:12px;margin-bottom:4px}
+  .azbox div{font-size:19px;font-weight:900;line-height:1.45}
+  .azbox .hl{color:#ff6b6b}
+  .stepinfo{color:var(--muted);font-weight:800;font-size:14.5px;margin-bottom:10px}
+  .stepinfo b{color:#ff4d4d}
+  .bslot{min-height:62px;background:#140e0b;border:2px dashed #4a3628;border-radius:16px;padding:9px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+  .bchips{display:flex;flex-wrap:wrap;gap:9px}
+  .bchip{background:#211814;border:2px solid #4a3628;border-radius:14px;padding:10px 15px;font-weight:900;font-size:17px;color:#f3ece6}
+  .bchip.chunk{border-color:#f28c4a;color:#f2a65a;background:#33221a}
+  .bslot .bchip{background:#1f6b3a;border-color:#2fd27a;color:#fff}
+  .bchip.used{display:none}
+  .bchip.wrong{border-color:var(--bad);background:#4a1f22}
+  .bchip.hint{animation:pulse .8s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 6px rgba(242,166,90,.45)}}
+  .done-sent{background:#163a24;border-radius:16px;padding:14px;color:#5ee08a;font-weight:900;font-size:18px;line-height:1.45;margin-bottom:12px}
+  .ptext{background:#140e0b;border:2px solid var(--line);border-radius:18px;padding:16px;font-size:17px;line-height:1.75;margin:14px 0}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#fff;color:#1b1b33;border-radius:14px;padding:12px 18px;font-weight:900;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:90vw;text-align:center}
+  .confetti{position:fixed;top:-12px;width:9px;height:14px;border-radius:2px;pointer-events:none;z-index:99;animation:fall 1.4s ease-in forwards}
+  @keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:.2}}
+  .shake{animation:shake .35s}
+  @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  @media print{
+    body{background:#fff;color:#000}
+    #app{display:none}
+    #printArea{display:block;padding:10mm;font-family:Arial,sans-serif}
+    #printArea h1{font-size:18pt;margin:0 0 4mm}
+    #printArea h2{font-size:13pt;margin:6mm 0 2mm}
+    #printArea table{width:100%;border-collapse:collapse;font-size:10.5pt}
+    #printArea td,#printArea th{border:1px solid #999;padding:3px 6px;text-align:left}
+    #printArea th{background:#eee}
+  }
+
+  /* Söz öyrən */
+  .lhead{display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+  .lhead .lback,.lnav .lback{border:3px solid #fbeee0;background:transparent;color:#fbeee0;padding:9px 18px;font-size:16px}
+  .lh{font-size:28px;font-weight:900;color:#fbeee0;margin:6px 0 12px;line-height:1.1}
+  .lhead .lh{margin:0}
+  .lrow{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;background:#1f2350;border:3px solid #fbeee0;border-radius:24px;padding:18px 18px 18px 30px;margin-top:14px;overflow:hidden;box-shadow:0 5px 0 rgba(0,0,0,.3)}
+  .lrow::before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--lc)}
+  .lrow b{display:block;font-size:27px;font-weight:900;color:#fff}
+  .lrow span{display:block;font-size:15px;font-weight:700;color:#c9c9f2;margin-top:4px}
+  .lrow em{font-style:normal;background:#191a3a;color:var(--yellow);font-weight:900;font-size:17px;border-radius:99px;padding:6px 12px;flex:none}
+  .tile.ldone{outline:3px solid #7fb0ff;outline-offset:-3px}
+  .tile.ltask{background:#3a2430;border:3px solid #c45a55;color:#d9d0e8;min-height:130px}
+  .tile.ltask::after{display:none}
+  .tile.ltask h3{color:#ef8b7a;font-size:28px}
+  .tile.ltask .sub{font-size:15px;opacity:1}
+  .tile.ltask .lk{font-size:15px;font-weight:900;color:#ef8b7a;position:relative}
+  .tile.ltask.ldone{border-color:#3cc4b4;outline:none} .tile.ltask.ldone .lk{color:#3cc4b4}
+  .xbtn{display:inline-block;background:var(--yellow);color:#1b1b33;font-weight:900;font-size:17px;border-radius:99px;padding:13px 24px;margin:2px 0 16px;box-shadow:0 5px 0 rgba(0,0,0,.3)}
+  .lstat{display:flex;justify-content:space-between;align-items:center;font-weight:800;margin-bottom:8px} .lstat span{color:var(--yellow)}
+  .lcard{background:#e2f0ee;border-radius:26px;padding:24px 18px;text-align:center;color:#1b1b33}
+  .lwrow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+  .lw{font-size:40px;font-weight:900;color:#3f9488;line-height:1.1;word-break:break-word}
+  .lw2{font-size:34px;font-weight:900;color:#1d2148;line-height:1.1}
+  .lspk{flex:none;width:52px;height:52px;border-radius:50%;border:3px solid #3f9488;background:transparent;font-size:20px;display:grid;place-items:center}
+  .lipa{color:#6e7290;font-size:22px;font-weight:700;margin-top:8px}
+  .laz{font-size:32px;font-weight:900;color:#1d2148;margin-top:16px;line-height:1.15}
+  .lru{color:#6e7290;font-size:19px;font-weight:800;margin-top:6px}
+  .lsym{font-size:34px;font-weight:900;color:#c2456b;margin:8px 0}
+  .lnote{margin-top:14px;font-size:14px;font-weight:800;color:#3f9488}
+  .ldef{font-size:19px;font-weight:700;color:#24584f;line-height:1.4;margin:14px 0 4px}
+  .lexrow{display:flex;align-items:center;gap:12px;margin-top:18px;text-align:left}
+  .lex{flex:1;font-size:19px;font-weight:600;line-height:1.4;color:#1d2148}
+  .lex mark{background:none;color:#c2456b;font-weight:900}
+  .lbtns{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 6px}
+  .lb{border-radius:26px;padding:18px 10px;font-weight:900;font-size:21px}
+  .lb.later{background:#1e2350;border:3px solid #3f9488;color:#3f9488}
+  .lb.ok{background:#4f7fd6;color:#fff;border:3px solid #4f7fd6} .lb.ok.was{background:#6e6f8c;border-color:#6e6f8c}
+  .lh3{font-size:22px;font-weight:900;color:#c9c9f2;margin:18px 0 10px}
+  .lchips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .lchip{background:#1e2350;border:2px solid #2e3366;border-radius:16px;padding:13px 8px;font-weight:800;font-size:16px;color:#c9c9f2;word-break:break-word}
+  .lchip.cur{border:3px solid #3f9488;color:#fbeee0}
+  .lchip.done{color:#5fc98a;opacity:.85}
+
+  /* Fill the gap */
+  .tile.gtask{min-height:150px}
+  .tile.gtask h3{font-size:30px}
+  .tile.gtask .sub{font-size:16px}
+  .ghead{display:flex;align-items:center;gap:12px;margin:4px 0 12px}
+  .gtl{background:#1f2350;color:var(--yellow);font-weight:900;font-size:24px;border-radius:16px;padding:8px 16px;flex:none}
+  .gbar{flex:1;height:22px;border:3px solid #fbeee0;border-radius:99px;overflow:hidden;background:#1f2350}
+  .gbar i{display:block;height:100%;background:linear-gradient(90deg,#f2c94c,#f07a2a);border-radius:99px;transition:width .3s}
+  .gnum{font-size:20px;font-weight:900;color:#fbeee0;flex:none}
+  .gok{display:inline-block;background:#1d4a2c;color:#fff;font-weight:900;font-size:18px;border-radius:99px;padding:6px 16px;margin-bottom:14px}
+  .qcard.gq{border:3px solid #fbeee0;border-radius:28px;background:#1f2350;padding:24px 18px;box-shadow:0 6px 0 rgba(0,0,0,.3)}
+  .qcard.gq .lbl{font-size:15px;color:#b7b9e8}
+  .qcard.gq .w.md{font-size:24px;line-height:1.75;color:#fbeee0;margin-top:12px}
+  .gapline{display:inline-block;min-width:120px;border-bottom:4px solid #fbeee0;margin:0 6px;line-height:1.2;vertical-align:baseline;padding:0 4px}
+  .gapline.ok{color:var(--ok);border-color:var(--ok)} .gapline.bad{color:var(--yellow);border-color:var(--bad)}
+  .opt.gopt{border:3px solid #fbeee0;background:#1f2350;border-radius:22px;padding:16px;font-size:20px;box-shadow:0 5px 0 rgba(0,0,0,.3)}
+  .opt.gopt .k{width:38px;height:38px;font-size:17px}
+  .opt.gopt.ok{background:rgba(47,210,122,.22);border-color:var(--ok)} .opt.gopt.bad{background:rgba(255,93,108,.22);border-color:var(--bad)}
+  .gres{text-align:center;border:3px solid #fbeee0;border-radius:28px;background:#1f2350;padding:28px 18px;margin-bottom:6px}
+  .gres .gt{color:var(--yellow);font-size:28px;font-weight:900}
+  .gres .gpct{font-size:84px;font-weight:900;color:#f07a2a;line-height:1.1;margin:10px 0}
+  .gres h3{font-size:28px;font-weight:900;color:#fbeee0;margin:6px 0}
+  .gres p{color:#b7b9e8;font-weight:700;font-size:17px;margin:6px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="printArea"></div>
+
+<!-- Məlumat faylları. Yeni sinif əlavə edəndə buraya yeni sətir yazın (məs. g6-data.js) -->
+<script src="g5-data.js"></script>
+<script src="g6-data.js"></script>
+<script src="g7-data.js"></script>
+<script src="g8-data.js"></script>
+<script src="g9-data.js"></script>
+<script src="g10-data.js"></script>
+<script src="g11-data.js"></script>
+<script src="paragraph-data.js"></script>
+<script src="makeup-data.js"></script>
+<script src="gap-data.js"></script>
+
+<script>
+/* =========================================================
+   PARAMETRLƏR — burada dəyişə bilərsiniz
+   ========================================================= */
+const SITE_TITLE    = "English 5–11";
+const SITE_SUB      = "5–11-ci sinif dərslikləri əsasında";
+const TEACHER_PHONE = "";   // məs. "994551234567" — boş qalsa, WhatsApp-da kimə göndəriləcəyini şagird özü seçir
+const NOTE_FACTS = ["“The quick brown fox jumps over the lazy dog” cümləsində ingilis əlifbasının 26 hərfinin hamısı var. Belə cümlələrə pangram deyilir.", "İngilis dilində ən çox işlənən söz “the”, ən çox işlənən hərf isə “e”-dir.", "“Goodbye” sözü köhnə “God be with ye” (Allah səninlə olsun) ifadəsinin qısalmış formasıdır.", "“Alphabet” sözü yunan əlifbasının ilk iki hərfinin adından yaranıb: alfa və beta.", "“Strengths” sözündə 9 hərf var, amma yalnız bir sait (e).", "“Rhythm” sözündə a, e, i, o, u saitlərindən heç biri yoxdur.", "“Facetious” və “abstemious” sözlərində beş sait (a, e, i, o, u) əlifba sırası ilə düzülüb.", "“Bookkeeper” sözündə ard-arda üç qoşa hərf var: oo, kk, ee.", "“Typewriter” sözünü klaviaturanın yalnız yuxarı hərf sırası (QWERTYUIOP) ilə yazmaq olar.", "“Queue” sözünün son dörd hərfini (ueue) atsanız da, söz eyni cür oxunur: /kjuː/.", "“Dreamt” sözü “mt” ilə bitən demək olar ki, yeganə ingilis sözüdür.", "“Uncopyrightable” sözündə 15 hərf var və heç bir hərf təkrarlanmır.", "“Knife” və “know” sözlərində k hərfi indi oxunmur, amma köhnə ingilis dilində oxunurdu.", "İngilis dilində “I” (mən) əvəzliyi cümlənin harasında olursa olsun, həmişə böyük hərflə yazılır.", "“Fortnight” (iki həftə) sözü “fourteen nights”, yəni “on dörd gecə” ifadəsindən yaranıb.", "“OK” ifadəsi 1839-cu ildə Bostonda qəzetlərdə “oll korrect” (all correct sözlərinin zarafatla səhv yazılışı) kimi yaranıb.", "“Robot” sözü çex dilindən gəlib. Onu ilk dəfə yazıçı Karel Çapek 1920-ci ildə yazdığı pyesdə işlədib.", "“Sandwich” sözü bu yeməyi sevən Sandviç qrafının (Earl of Sandwich) adından götürülüb.", "“Kangaroo” sözü Avstraliyanın yerli xalqlarından birinin dilindən ingilis dilinə keçib.", "“Pyjamas” sözü fars mənşəlidir: “pay” (ayaq) və “jama” (paltar) sözlərindən yaranıb.", "İngilis dilini xarici dil kimi danışanların sayı onu ana dili kimi danışanlardan çoxdur.", "Britaniya və Amerika ingiliscəsində bəzi sözlər fərqlidir: lift / elevator, biscuit / cookie, pavement / sidewalk.", "Uilyam Şekspir ingilis dilinə çoxlu söz və ifadə qazandırıb. Məsələn, “eyeball” və “bedroom” sözlərinə ilk dəfə onun əsərlərində rast gəlinir.", "Eyni yazılan sözlərin tamamilə fərqli mənası ola bilər: “bat” həm “yarasa”, həm də “bita” deməkdir.", "Ən uzun ingilis sözlərindən biri 45 hərfli “pneumonoultramicroscopicsilicovolcanoconiosis”dir. Bu, ağciyər xəstəliyinin adıdır.", "“Run” və “set” kimi sadə sözlərin lüğətdə yüzlərlə mənası var.", "“Polyglot” (poliqlot) çox dil bilən insana deyilir. Söz yunan dilindən gəlir: “poly” (çox) və “glotta” (dil).", "“Hello” sözü telefonun ixtirasından sonra salamlaşma sözü kimi geniş yayılıb.", "İngilis dilində “breakfast” (səhər yeməyi) sözünün mənası “orucu açmaq”dır: “break” (pozmaq) və “fast” (oruc).", "“Bedroom”, “sunflower”, “bookworm” kimi sözlər iki sözün birləşməsindən yaranır. Belə sözlərə compound words deyilir."];
+function noteOfDay(){ const d=new Date(); const n=Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(2026,0,1))/864e5); const p=x=>String(x).padStart(2,"0"); return { date: p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear(), text: NOTE_FACTS[((n%NOTE_FACTS.length)+NOTE_FACTS.length)%NOTE_FACTS.length] }; }
+const GRADE_BOOKS   = { 5: "Game Changer · Grade 5", 6: "English · Grade 6", 7: "Shape It! · Grade 7", 8: "English 8 · Şərq-Qərb", 9: "English 9 · Şərq-Qərb", 10: "English 10 · Şərq-Qərb", 11: "English 11 · Şərq-Qərb" };
+const LINKS = [
+  ["UŞAQLAR ÜÇÜN", [
+    ["British Council · LearnEnglish Kids", "Mahnılar, cizgi hekayələr, oyunlar · 5–8-ci siniflər", "https://www.youtube.com/user/BritishCouncilLEKids", "YouTube"],
+    ["LearnEnglish Kids (sayt)", "Oyunlar, hekayələr və tapşırıqlar", "https://learnenglishkids.britishcouncil.org/", "Sayt"]
+  ]],
+  ["DİNLƏMƏ VƏ LÜĞƏT", [
+    ["BBC Learning English", "Qrammatika, tələffüz, söz ehtiyatı · 7–11-ci siniflər", "https://www.youtube.com/@bbclearningenglish", "YouTube"],
+    ["VOA Learning English", "Yavaş oxunan xəbərlər və hekayələr", "https://www.youtube.com/voalearningenglish", "YouTube"],
+    ["BBC Learning English (sayt)", "Dərslər və podkastlar", "https://www.bbc.co.uk/learningenglish", "Sayt"]
+  ]]
+];
+
+/* =========================================================
+   Yaddaş
+   ========================================================= */
+const _mem = {};
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem("e511:"+k); if(v) return JSON.parse(v); }catch(e){} return (k in _mem) ? _mem[k] : d; },
+  set(k, v){ _mem[k]=v; try{ localStorage.setItem("e511:"+k, JSON.stringify(v)); }catch(e){} }
+};
+const wkey = w => w.g+"|"+w.en;
+function addMistake(w){ const m = store.get("mistakes",{}); const k=wkey(w); m[k]={k,n:(m[k]?.n||0)+1}; store.set("mistakes",m); }
+function removeMistake(w){ const m = store.get("mistakes",{}); delete m[wkey(w)]; store.set("mistakes",m); }
+function addKnown(w){ const s = store.get("known",{}); s[wkey(w)]=1; store.set("known",s); }
+function mistakeWords(g){ const m = store.get("mistakes",{}); return Object.keys(m).map(k=>WORD_BY_KEY[k]).filter(w=>w && (g==null || w.g==g)); }
+function saveResult(r){ const a = store.get("results",[]); a.unshift(r); store.set("results", a.slice(0,60)); }
+
+/* =========================================================
+   Məlumatlar
+   ========================================================= */
+const GDATA = window.GDATA || {};
+const PARA = window.PARA || {topics:[],plan:[],linkers:[],minWords:80};
+const WORDS = {};          // WORDS[g][u] = [word, ...]
+const WORD_BY_KEY = {};
+const TEXT_UNIT = {};      // mətn → [g,u] (səs faylını tapmaq üçün)
+Object.keys(GDATA).forEach(g=>{
+  WORDS[g] = {};
+  Object.entries(GDATA[g].units).forEach(([u,ud])=>{
+    WORDS[g][u] = [];
+    ud.tests.forEach(t=>t.words.forEach(a=>{
+      const w = {en:a[0],az:a[1],ru:a[2],pos:a[3],ex:a[4],def:a[5],ipa:a[6],g:+g,u:+u,t:t.id};
+      WORDS[g][u].push(w); WORD_BY_KEY[wkey(w)] = w;
+      TEXT_UNIT[w.en.toLowerCase()] ||= [g,u]; TEXT_UNIT[w.ex.toLowerCase()] ||= [g,u];
+    }));
+  });
+  Object.entries(GDATA[g].reading||{}).forEach(([u,r])=>{ TEXT_UNIT[r.text.toLowerCase()] = [g,u]; });
+});
+const grades = () => Object.keys(GDATA).map(Number);
+const UN = u => (+u===0 ? "Welcome" : "Unit " + u);
+const unitsOf = g => Object.keys(GDATA[g]?.units||{}).map(Number);
+const unitWords = (g,u) => WORDS[g]?.[u] || [];
+const gradeWords = g => unitsOf(g).flatMap(u=>unitWords(g,u));
+const allWords = () => grades().flatMap(gradeWords);
+
+/* =========================================================
+   Köməkçilər
+   ========================================================= */
+const $app = document.getElementById("app");
+const esc = s => String(s??"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const shuffle = a => { a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+const ord = g => g+({5:"-ci",6:"-cı",7:"-ci",8:"-ci",9:"-cu",10:"-cu",11:"-ci"}[g]||"-ci");
+const posAz = p => ({noun:"isim",adjective:"sifət",verb:"fel",phrase:"ifadə",adverb:"zərf",preposition:"önqoşma"}[p]||p);
+const nav = (back, label) => `<div class="nav">${back?`<button class="pill" data-go="${back}">‹ ${esc(label||"Geri")}</button>`:""}<button class="pill home" data-go="#home">⌂${back?"":" Əsas səhifə"}</button></div>`;
+function toast(t){ const d=document.createElement("div"); d.className="toast"; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2200); }
+function confetti(){
+  const cols=["#f2c94c","#3cc4b4","#ef7a6a","#8fd16a","#7c5cf0","#f0a6b8"];
+  for(let i=0;i<28;i++){ const d=document.createElement("div"); d.className="confetti";
+    d.style.left=Math.random()*100+"vw"; d.style.background=cols[i%cols.length];
+    d.style.animationDelay=(Math.random()*.25)+"s"; d.style.animationDuration=(1+Math.random()*.8)+"s";
+    document.body.appendChild(d); setTimeout(()=>d.remove(),2300); }
+}
+function highlight(sentence, word){
+  const s = esc(sentence), w = esc(word); const i = s.toLowerCase().indexOf(w.toLowerCase());
+  return i<0 ? s : s.slice(0,i)+"<mark>"+s.slice(i,i+w.length)+"</mark>"+s.slice(i+w.length);
+}
+const MSG_TITLE = "5–11 English Vocabulary";
+const KIND_NAMES = { vocab:"Word Exam", syn:"Synonyms", ant:"Antonyms", def:"Definitions", gap:"Fill the gap", make:"Make Up", read:"Reading", para:"Paragraph Writing" };
+const sec = () => (store.get("profile",{})||{}).section || "az";
+const LNG = () => sec()==="ru" ? "RU" : "AZ";
+const tr  = w => sec()==="ru" ? w.ru : w.az;
+const tr2 = w => sec()==="ru" ? w.az : w.ru;
+const dirLabel = d => d==="en" ? `EN → ${LNG()}` : `${LNG()} → EN`;
+const pad2 = n => String(n).padStart(2,"0");
+const hhmm = t => { const d=new Date(t); return pad2(d.getHours())+":"+pad2(d.getMinutes()); };
+const ddmmyyyy = t => { const d=new Date(t); return pad2(d.getDate())+"."+pad2(d.getMonth()+1)+"."+d.getFullYear(); };
+const CODE_SALT = "e511-v1-ulkar";
+function fnv(str, seed){ let h = seed>>>0; for(const ch of str){ h ^= ch.codePointAt(0); h = Math.imul(h, 16777619)>>>0; } return h>>>0; }
+function makeCode(body){ const b = CODE_SALT + body.replace(/\s+/g,""); const a=fnv(b,2166136261).toString(16).toUpperCase().padStart(8,"0"); const c=fnv(b,0x9747b28c).toString(16).toUpperCase().padStart(8,"0"); return a.slice(0,4)+"-"+c.slice(4,8); }
+function resultLine(r, i){
+  let t = r.title || "";
+  const dl = r.dirL || (r.dir ? (r.dir==="en"?"EN → AZ":"AZ → EN") : "");
+  if(dl) t = /^\d+-\S+ sinif/.test(t) ? t.replace(/^(\d+-\S+ sinif)/, "$1 · "+dl) : t+" · "+dl;
+  let line = `${i}) ${t} — ${r.ok}/${r.total} (${r.pct}%) · ${hhmm(r.t)}`;
+  if(r.note) line += `\n    📌 ${r.note}`;
+  else if(Array.isArray(r.miss)) line += r.miss.length ? `\n    ❌ Səhvlər (${r.miss.length}): ${r.miss.join(", ")}` : `\n    ✅ Səhv yoxdur`;
+  return line;
+}
+function buildMsg(list){
+  const p = store.get("profile",{})||{};
+  const kinds = [...new Set(list.map(r=>r.kind||"vocab"))];
+  const head = kinds.length===1 ? (KIND_NAMES[kinds[0]]||"Nəticələr") : "Ümumi nəticələr";
+  const avg = list.length ? Math.round(list.reduce((a,r)=>a+r.pct,0)/list.length) : 0;
+  const now = Date.now();
+  const body = [
+    `📚 ${MSG_TITLE} · ${head}`,
+    `👤 ${p.role==="teacher"?"Müəllim":"Şagird"}: ${(p.first||"")+" "+(p.last||"")}`.trimEnd(),
+    p.cls ? `🏫 Sinif: ${p.cls}` : null,
+    `🌐 Bölmə: ${sec()==="ru"?"Rus":"Azərbaycan"}`,
+    ``,
+    `📝 Nəticələr (${list.length}):`,
+    ...list.map((r,i)=>resultLine(r,i+1)),
+    ``,
+    `📊 Orta nəticə: ${avg}%`,
+    `🕒 ${ddmmyyyy(now)} ${hhmm(now)}`
+  ].filter(x=>x!==null).join("\n");
+  return body + `\n🔐 Kod: ${makeCode(body)}`;
+}
+function waResults(list){ return "https://api.whatsapp.com/send?" + (TEACHER_PHONE ? `phone=${TEACHER_PHONE}&` : "") + "text=" + encodeURIComponent(buildMsg(list)); }
+function unsentResults(){ const a=store.get("results",[]); const u=a.filter(r=>!r.sent); return (u.length?u:a.slice(0,10)).slice(0,20).reverse(); }
+function markSent(list){ const ts=new Set(list.map(r=>r.t)); const a=store.get("results",[]).map(r=> ts.has(r.t)?{...r,sent:true}:r); store.set("results",a); }
+function sendBtn(list, text){ return `<a class="btn green" data-send="${list.map(r=>r.t).join(",")}" href="${esc(waResults(list))}" target="_blank" rel="noopener">${text||"🟢 Nəticəni müəllimə göndər"}</a>`; }
+document.addEventListener("click", e=>{ const a=e.target.closest("[data-send]"); if(!a) return; const ts=a.dataset.send.split(",").map(Number); markSent(store.get("results",[]).filter(r=>ts.includes(r.t))); });
+
+function profileName(){ const p=store.get("profile",null); return p ? `${p.first} ${p.last}` : "Şagird"; }
+function waHref(text){
+  const p = store.get("profile",null);
+  const who = p ? `👤 ${p.first} ${p.last}${p.age?`, ${p.age} yaş`:""}${p.phone?` · +994${p.phone}`:""}` : "👤 Şagird";
+  return "https://api.whatsapp.com/send?" + (TEACHER_PHONE ? `phone=${TEACHER_PHONE}&` : "") + "text=" + encodeURIComponent(`${SITE_TITLE}\n${who}\n\n${text}`);
+}
+const resLine = r => `• ${r.title}${r.dir?` (${r.dir==="en"?"EN→AZ":"AZ→EN"})`:""}: ${r.ok}/${r.total} — ${r.pct}%`;
+
+/* ---------- Səs ---------- */
+const AUDIO = window.AUDIO = window.AUDIO || {};
+const _loading = {};
+function loadAudio(g,u){
+  const k=g+"-"+u; if(_loading[k]) return _loading[k];
+  return _loading[k] = new Promise(res=>{ const s=document.createElement("script"); s.src=`g${g}-audio-u${u}.js`;
+    s.onload=()=>res(true); s.onerror=()=>{ delete _loading[k]; res(false); }; document.head.appendChild(s); });
+}
+const _scripts = {};
+function loadScript(src){ return _scripts[src] ||= new Promise(res=>{ const s=document.createElement("script"); s.src=src; s.onload=()=>res(true); s.onerror=()=>{ delete _scripts[src]; res(false); }; document.head.appendChild(s); }); }
+function playSeq(list){ let k=0; const nxt=()=>{ if(k>=list.length) return; const b=AUDIO[list[k++].toLowerCase()]; if(!b){ nxt(); return; }
+  if(_au){ try{_au.pause();}catch(e){} } _au=new Audio("data:audio/mpeg;base64,"+b); _au.onended=nxt; const pr=_au.play(); if(pr&&pr.catch) pr.catch(()=>{}); }; nxt(); }
+function ensureAudio(t){ const k=String(t).toLowerCase(); if(AUDIO[k]) return Promise.resolve(); const gu=TEXT_UNIT[k]; return gu?loadAudio(gu[0],gu[1]):Promise.resolve(); }
+let _au=null;
+function speak(t, wait){
+  const k = String(t).toLowerCase();
+  const b = AUDIO[k];
+  try{ window.speechSynthesis && speechSynthesis.cancel(); }catch(e){}
+  if(_au){ try{_au.pause();}catch(e){} }
+  if(b){ try{ _au = new Audio("data:audio/mpeg;base64,"+b); const pr=_au.play(); if(pr&&pr.catch) pr.catch(()=>{}); return; }catch(e){} }
+  if(!wait && TEXT_UNIT[k]){ ensureAudio(t).then(()=>{ if(AUDIO[k]) speak(t,true); else tts(t); }); return; }
+  tts(t);
+}
+function tts(t){ try{ const s=window.speechSynthesis; if(!s) return; const u=new SpeechSynthesisUtterance(t); u.lang="en-US"; u.rate=.9; s.speak(u); }catch(e){} }
+
+/* ---------- Effekt səsləri və vibrasiya ---------- */
+const SFX = (()=>{
+  let ctx=null;
+  const on = ()=> store.get("sfx", true);
+  function ac(){ try{ ctx ||= new (window.AudioContext||window.webkitAudioContext)(); if(ctx.state==="suspended") ctx.resume(); }catch(e){ ctx=null; } return ctx; }
+  function tone(a, f, t, d, type, v, f2){ const o=a.createOscillator(), g=a.createGain(); o.type=type; o.frequency.setValueAtTime(f,t);
+    if(f2) o.frequency.exponentialRampToValueAtTime(f2,t+d); g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+d); o.connect(g); g.connect(a.destination); o.start(t); o.stop(t+d+0.02); }
+  return {
+    ok(){ if(!on()) return; const a=ac(); if(!a) return; const t=a.currentTime+0.01;
+      tone(a,659,t,0.14,"sine",0.22); tone(a,880,t+0.11,0.14,"sine",0.22); tone(a,1319,t+0.22,0.28,"sine",0.18); },
+    bad(){ if(!on()) return; const a=ac(); if(!a) return; const t=a.currentTime+0.01;
+      tone(a,220,t,0.18,"square",0.09,160); tone(a,150,t+0.17,0.32,"square",0.09,110); },
+    tap(){ if(!on()) return; const a=ac(); if(!a) return; tone(a,880,a.currentTime+0.005,0.07,"triangle",0.12); },
+    step(){ if(!on()) return; const a=ac(); if(!a) return; const t=a.currentTime+0.01; tone(a,784,t,0.1,"sine",0.16); tone(a,1047,t+0.08,0.16,"sine",0.16); }
+  };
+})();
+function buzz(){ if(!store.get("vib", true)) return; try{ navigator.vibrate && navigator.vibrate([90,60,140]); }catch(e){} }
+function good(){ SFX.ok(); }
+function wrong(){ SFX.bad(); buzz(); }
+
+/* ---------- Naviqasiya ---------- */
+function go(h){ if(location.hash===h) render(); else location.hash = h; }
+window.addEventListener("hashchange", render);
+document.addEventListener("click", e=>{
+  const s = e.target.closest("[data-say]"); if(s){ e.stopPropagation(); speak(s.dataset.say); return; }
+  const l = e.target.closest("[data-go]"); if(l && !l.classList.contains("locked")) go(l.dataset.go);
+});
+
+/* =========================================================
+   ƏSAS SƏHİFƏ
+   ========================================================= */
+const COVER = {5:["#f2a65a","#e2602c","🪁"],6:["#3b82c4","#1f4f7a","⚽"],7:["#ef7a6a","#b8433a","🎨"],8:["#3cc4b4","#1f8a7d","🪁"],9:["#8b7cf0","#4a3aa8","🪁"],10:["#a24fc0","#5a2a7a","🔷"],11:["#1f8f6a","#0f4d3a","🎯"]};
+const CARD_BG = {5:"#3a2a1c",6:"#1e2a48",7:"#1e3a2a",8:"#3a1e2c",9:"#2a2048",10:"#22284a",11:"#1c3a32"};
+function pageHome(){
+  const prof = store.get("profile",{first:"",last:"",role:"student"});
+  const covers = [5,6,7,8,9,10,11].map(g=>{
+    const ready = !!GDATA[g], c = COVER[g];
+    return `<button class="gcard ${ready?"":"locked"}" style="background:${CARD_BG[g]}" data-go="#g${g}">
+      <div class="cover" style="background:linear-gradient(160deg,${c[0]},${c[1]});padding:0"><img src="cover${g}.jpg" alt="${g}-ci sinif dərsliyi" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.remove()"></div>
+      <div class="lbl" style="color:${c[0]}"><em>${g}</em>Sinif</div><div class="go">${ready?"→":"🔒"}</div></button>`;
+  }).join("");
+  const res = store.get("results",[]);
+  $app.innerHTML = `
+    <div class="top"><div class="logo">E</div><div><h1>${esc(SITE_TITLE)}</h1><small>${esc(SITE_SUB)}</small></div></div>
+    <div class="pills"><button class="me" data-go="#register">${prof.role==="teacher"?"👩‍🏫":"👤"} ${esc(prof.first+" "+prof.last)} ✏️</button>
+      <button class="me alt" id="share">🔗 Proqramın linki</button>
+      <button class="me" id="sfxbtn" style="background:#fff3d6;color:#5a3b00">${store.get("sfx",true)?"🔔 Effekt səsləri: açıq":"🔕 Effekt səsləri: bağlı"}</button>
+      <button class="me" id="vibbtn" style="background:#ffe3e3;color:#7a1f1f">${store.get("vib",true)?"📳 Vibrasiya: açıq":"📴 Vibrasiya: bağlı"}</button></div>
+    <div class="hero"><h2>Sözləri öyrən, test et, yadda saxla!</h2><p>Dərslikdəki hər unitin sözləri, kartlar və testlər bir yerdə.</p><div class="big">📚</div></div>
+    ${(()=>{const N=noteOfDay(); return `<div class="note"><small>💡 Günün qeydi · Bilirdinizmi?</small> <span style="font-size:13px;opacity:.7">${esc(N.date)}</span><br>${esc(N.text)}</div>`;})()}
+    <div class="covers">${covers}
+      <button class="gcard all" style="background:#3a2a1c" data-go="#all"><div class="cover"><div style="font-size:22px">🟧🟦<br>🟩🟪</div><i>All in<br>One</i></div>
+        <div class="lbl" style="font-size:11.5px;margin-top:8px">Bütün siniflər</div><div class="go" style="color:#f2a65a">→</div></button></div>
+    ${res.length?`<a class="row send" data-send="${unsentResults().map(r=>r.t).join(",")}" href="${esc(waResults(unsentResults()))}" target="_blank" rel="noopener">🟢 Nəticəni müəllimə göndər</a>`:`<button class="row send" id="nores">🟢 Nəticəni müəllimə göndər</button>`}
+    ${prof.role==="teacher"?`<button class="row" style="background:#fff3d6;border-color:#d9a300" data-go="#verify"><span class="ic">🔐</span><div><b>Nəticəni yoxla</b><span>Şagirdin göndərdiyi mesajın kodunu yoxla</span></div><span class="arr">›</span></button>`:""}
+    <button class="row" style="background:linear-gradient(90deg,#fcd9c4,#f6c0a0);border-color:#d98a5a" data-go="#para"><span class="ic">✍️</span><div><b>Paragraph Writing</b><span>Mövzu seç · paraqrafı cümlə-cümlə qur</span></div><span class="badge" style="background:#b8501f;color:#fff">YENİ</span></button>
+    <button class="row" style="background:#d4f0d8;border-color:#55b06a" data-go="#results"><span class="ic">📊</span><div><b>Nəticələrim</b><span>${res.length} test · müəllimə göndər</span></div><span class="arr">›</span></button>
+    <button class="row" style="background:#dde6ff;border-color:#4a6fd0" data-go="#search"><span class="ic">🔎</span><div><b>Söz axtar</b><span>Söz hansı sinifdə, hansı unitdədir?</span></div><span class="arr">›</span></button>
+    <button class="row" style="background:#d63a3a;color:#fff;border-color:#8a1c1c" data-go="#feedback"><span class="ic">💬</span><div><b>Rəy və təklifləriniz</b><span>Yazın — müəllimə WhatsApp ilə gedir</span></div><span class="arr">›</span></button>
+    <button class="row" style="background:#d4f2ee;border-color:#2a9d93" data-go="#links"><span class="ic">🔗</span><div><b>Faydalı linklər</b><span>YouTube videoları və saytlar</span></div><span class="badge" style="background:#0f4d48;color:#fff">YOUTUBE</span></button>
+    <div class="foot">© ${new Date().getFullYear()} · ${esc(SITE_TITLE)}</div>`;
+  const nr=document.getElementById("nores"); if(nr) nr.onclick=()=>toast("Hələ nəticə yoxdur — əvvəlcə bir test et 🙂");
+  document.getElementById("sfxbtn").onclick=()=>{ store.set("sfx",!store.get("sfx",true)); if(store.get("sfx",true)) SFX.ok(); pageHome(); };
+  document.getElementById("vibbtn").onclick=()=>{ store.set("vib",!store.get("vib",true)); if(store.get("vib",true)) buzz(); pageHome(); };
+  document.getElementById("share").onclick = async ()=>{
+    const url = location.href.split("#")[0];
+    try{ await navigator.clipboard.writeText(url); toast("Link kopyalandı ✓"); }catch(e){ toast(url); }
+  };
+}
+
+/* =========================================================
+   SİNİF SƏHİFƏSİ
+   ========================================================= */
+const UNIT_COLORS = ["c-yellow","c-teal","c-coral","c-lime","c-pink","c-orange","c-teal","c-yellow"];
+function pageGrade(g){
+  const d = GDATA[g]; if(!d) return go("#home");
+  units = unitsOf(g);
+  const tiles = units.map((u,i)=>`<button class="tile ${UNIT_COLORS[i%8]}" data-go="#g${g}-u${u}"><h3>${UN(u)}</h3><span class="sub">${d.units[u].tests.length} test · ${unitWords(g,u).length} söz</span></button>`).join("");
+  const mc = mistakeWords(g).length, total = gradeWords(g).length;
+  $app.innerHTML = `${nav()}
+    <div class="gbanner"><span class="tag">${g} CLASS</span><h2>ENGLISH ${g}</h2><span class="vb">VOCABULARY</span><small>${esc(GRADE_BOOKS[g]||"")} · ${total} söz</small></div>
+    <h2 class="sec-title" style="margin-top:0">Menyu seçin</h2>
+    <p class="sec-desc">Hər unitin bütün sözləri testlərə daxildir. Doğru cavab tapdıqca fişənglər atılır! 🎉</p>
+    <div class="grid">${tiles}</div>
+    <div class="grid" style="margin-top:12px">
+      <button class="tile c-violet" data-go="#g${g}-syn"><h3>Synonyms</h3><span class="sub">${units.length} test · sinonimlər</span></button>
+      <button class="tile c-green" data-go="#g${g}-ant"><h3>Antonyms</h3><span class="sub">${units.length} test · antonimlər</span></button>
+      <button class="tile wide" style="background:#1f8f97;color:#fff" data-go="#g${g}-def"><h3>Definitions</h3><span class="sub">${units.length} test · tərifə görə sözü tap</span></button>
+      <button class="tile c-wine" data-go="#g${g}-learn"><h3 style="color:#ef8b7a">Söz öyrən</h3><span class="sub" style="color:#ddd;font-size:14px">Sözlər · sinonimlər · antonimlər · təriflər</span></button>
+      <button class="tile c-lav" data-go="#g${g}-cards"><h3>🃏 Kartlarla öyrən</h3><span class="sub">Flashcards · unitlər üzrə</span></button>
+      <button class="tile c-sky" data-go="#g${g}-gap"><h3>Fill the gap</h3><span class="sub">Boşluğu doldur · unitlər üzrə</span></button>
+      <button class="tile" style="background:#b8a6f0" data-go="#g${g}-make"><h3>Make Up</h3><span class="sub">Cümlə qur · unitlər üzrə</span></button>
+      <button class="tile c-peach" data-go="#g${g}-dict"><h3>PDF Lüğət</h3><span class="sub">Sözlər · transkripsiya · AZ · RU</span></button>
+      <button class="tile c-magenta" data-go="#g${g}-read"><h3>Reading · Mətnlər</h3><span class="sub">Hər unitə 1 mətn · suallar</span></button>
+      <button class="tile wide c-red" data-go="#g${g}-mistakes"><h3>Səhvlərim</h3><span class="sub">${mc} səhv · təkrar et</span></button>
+    </div>
+    <div class="foot">${esc(GRADE_BOOKS[g]||"")} · Azərbaycan nəşri əsasında</div>`;
+}
+let units = [];
+
+/* ---------- Unit seçimi (ümumi) ---------- */
+function pageChooser(g, kind, title, desc, sub){
+  const us = unitsOf(g);
+  $app.innerHTML = `${nav("#g"+g, ord(g)+" sinif")}
+    <h2>${title}</h2><p class="sec-desc" style="margin-top:6px">${desc}</p>
+    <div class="grid">${us.map((u,i)=>`<button class="tile ${UNIT_COLORS[i%8]}" data-go="#g${g}-${kind}-${u}"><h3>${UN(u)}</h3><span class="sub">${sub(u)}</span></button>`).join("")}
+    ${kind==="learn"||kind==="cards"||kind==="read"?"":`<button class="tile wide c-violet" data-go="#g${g}-${kind}-all"><h3>Hamısı</h3><span class="sub">Bütün unitlərdən qarışıq · 20 sual</span></button>`}</div>`;
+}
+
+/* ---------- Unit səhifəsi ---------- */
+function pageUnit(g,u){
+  const ud = GDATA[g]?.units[u]; if(!ud) return go("#g"+g);
+  loadAudio(g,u);
+  const dir = store.get("dir","en");
+  const tc = ["c-yellow","c-teal","c-coral","c-lime","c-pink","c-orange"];
+  const tests = ud.tests.map((t,i)=>`<button class="tile ${tc[i%6]}" data-go="#g${g}-u${u}-quiz-${t.id.replace(".","-")}"><h3>${t.id}</h3><span class="sub">${esc(t.title)} · ${t.words.length} sual</span></button>`).join("");
+  $app.innerHTML = `${nav("#g"+g, ord(g)+" sinif")}
+    <h2 class="sec-title" style="margin-top:0">${UN(u)} · ${esc(ud.title)}</h2>
+    <p class="sec-desc">Əvvəl sözləri öyrən, sonra test et. Sözlər testlər arasında təkrarlanmır.</p>
+    <button class="row c-lav" data-go="#g${g}-learn-${u}"><span class="ic">📖</span><div><b>Sözləri öyrən</b><span>Siyahı · transkripsiya · səsləndirmə</span></div><span class="arr">›</span></button>
+    <button class="row c-pink" data-go="#g${g}-cards-${u}"><span class="ic">🃏</span><div><b>Kartlarla öyrən</b><span>Flashcards · tasklar üzrə · bildim / təkrar</span></div><span class="arr">›</span></button>
+    <h3 class="sec-title">Testlər</h3>
+    <div class="seg"><button data-dir="en" class="${dir==="en"?"on":""}">${dirLabel("en")}</button><button data-dir="az" class="${dir==="az"?"on":""}">${dirLabel("az")}</button></div>
+    <div class="grid">${tests}<button class="tile c-violet" data-go="#g${g}-u${u}-quiz-all"><h3>Hamısı</h3><span class="sub">Bütün unit · ${unitWords(g,u).length} sual</span></button></div>`;
+  $app.querySelectorAll("[data-dir]").forEach(b=>b.onclick=()=>{ store.set("dir",b.dataset.dir); pageUnit(g,u); });
+}
+
+function pageLearn(g,u){
+  loadAudio(g,u);
+  const ud = GDATA[g].units[u];
+  const blocks = ud.tests.map(t=>`<h3 class="sec-title" style="font-size:17px;color:var(--yellow)">${t.id} · ${esc(t.title)}</h3>`+
+    unitWords(g,u).filter(w=>w.t===t.id).map(w=>`<div class="word"><div><div class="en">${esc(w.en)}${w.ipa?`<small>/${esc(w.ipa)}/</small>`:""}</div>
+      <div class="az">${esc(tr(w))} · ${esc(tr2(w))}</div><div class="ex" data-say="${esc(w.ex)}">🔊 ${esc(w.ex)}</div></div>
+      <button class="spk" data-say="${esc(w.en)}" aria-label="Səsləndir">🔊</button></div>`).join("")).join("");
+  $app.innerHTML = `${nav("#g"+g+"-u"+u, UN(u))}<h2>📖 ${UN(u)} · sözlər</h2>
+    <p class="sec-desc" style="margin-top:6px">🔊 düyməsinə və ya cümləyə toxun — səslənəcək.</p>${blocks}`;
+}
+
+/* ---------- Söz öyrən (Öyrəndim / Sonra) ---------- */
+const LK = { lw:{name:"Sözlər", sub:"Unitlər üzrə", color:"#3f9488"}, ls:{name:"Sinonimlər", sub:"Eyni mənalı sözlər", color:"#2fa84f"},
+             la:{name:"Antonimlər", sub:"Əks mənalı sözlər", color:"#ec5ea8"}, ld:{name:"Definitions", sub:"Söz və tərifi", color:"#f08a3c"} };
+const pairKey = (g,kind,p) => `${kind}|${g}|${p[0]}|${p[1]}`;
+function learnPairs(g,kind,u){ const src = kind==="ls" ? GDATA[g].syn : GDATA[g].ant; const seen=new Set();
+  return (src[u]||[]).filter(p=>{ const k=[p[0],p[1]].sort().join("|"); if(seen.has(k)) return false; seen.add(k); return true; }); }
+const defWords = (g,u) => unitWords(g,u).filter(w=>w.def && w.pos!=="phrase");
+function learnItems(g,kind,u,tid){
+  if(kind==="ls"||kind==="la") return learnPairs(g,kind,u).map(p=>({key:pairKey(g,kind,p), p, chip:p[0]+" — "+p[1]}));
+  let ws = kind==="ld" ? defWords(g,u) : unitWords(g,u);
+  if(tid) ws = ws.filter(w=>w.t.replace(".","-")===tid);
+  return ws.map(w=>({key:(kind==="ld"?"def|":"")+wkey(w), w, chip:w.en}));
+}
+function isLearned(kind,key){ return kind==="lw" ? !!store.get("known",{})[key] : !!store.get("learned",{})[key]; }
+function setLearned(kind,key,on){ const sk = kind==="lw"?"known":"learned"; const s=store.get(sk,{}); if(on) s[key]=1; else delete s[key]; store.set(sk,s);
+  if(kind==="lw"){ const w=WORD_BY_KEY[key]; if(w && on) removeMistake(w); } }
+const learnedOf = (kind,items) => items.filter(it=>isLearned(kind,it.key)).length;
+const segDir = () => { const dir=store.get("dir","en"); return `<div class="seg"><button data-ldir="en" class="${dir==="en"?"on":""}">${dirLabel("en")}</button><button data-ldir="az" class="${dir==="az"?"on":""}">${dirLabel("az")}</button></div>`; };
+function bindDir(redraw){ $app.querySelectorAll("[data-ldir]").forEach(b=>b.onclick=()=>{ store.set("dir",b.dataset.ldir); redraw(); }); }
+const lnav = (back,label,home) => `<div class="nav lnav"><button class="pill lback" data-go="${back}">‹ ${esc(label)}</button>${home?`<button class="pill home" data-go="#g${home}">⌂ Ana menyu</button>`:""}</div>`;
+
+function pageLearnHub(g){
+  if(!GDATA[g]) return go("#home");
+  const us=unitsOf(g);
+  const cnt = k => { const it=us.flatMap(u=>learnItems(g,k,u)); return [learnedOf(k,it), it.length]; };
+  $app.innerHTML = `<div class="lhead"><button class="pill lback" data-go="#g${g}">‹ Ana menyu</button><h2 class="lh">Söz öyrən</h2></div>
+    <p class="sec-desc">Bölməni seç. Hər taskda imtahandakı eyni sözlər var. Bildiyinə “Öyrəndim” de — bir daha çıxmayacaq. Hamısını öyrənəndə imtahana keç.</p>
+    ${segDir()}
+    ${["lw","ls","la","ld"].map(k=>{ const [a,b]=cnt(k); return `<button class="lrow" style="--lc:${LK[k].color}" data-go="#g${g}-${k}"><div><b>${LK[k].name}</b><span>${LK[k].sub}</span></div><em>${a}/${b}</em></button>`; }).join("")}`;
+  bindDir(()=>pageLearnHub(g));
+}
+function pageLearnUnits(g,kind){
+  if(!GDATA[g]) return go("#home");
+  const us=unitsOf(g);
+  $app.innerHTML = `${lnav("#g"+g+"-learn","Söz öyrən",g)}<h2 class="lh">${LK[kind].name} · Unitlər</h2>${segDir()}
+    <div class="grid">${us.map((u,i)=>{ const it=learnItems(g,kind,u), k=learnedOf(kind,it);
+      const first = kind==="lw"||kind==="ld" ? `${GDATA[g].units[u].tests.length} task · ${it.length} söz` : `${it.length} cüt söz`;
+      return `<button class="tile ${UNIT_COLORS[i%8]} ${it.length&&k===it.length?"ldone":""}" data-go="#g${g}-${kind}-${u}" ${it.length?"":"disabled"}><h3>${UN(u)}</h3><span class="sub">${first}<br>Öyrənildi ${k}/${it.length}</span></button>`; }).join("")}</div>`;
+  bindDir(()=>pageLearnUnits(g,kind));
+}
+function learnExam(g,kind,u,tid){
+  if(kind==="lw") return `#g${g}-u${u}-quiz-${tid||"all"}`;
+  return `#g${g}-${{ls:"syn",la:"ant",ld:"def"}[kind]}-${u}`;
+}
+function pageLearnTasks(g,kind,u){
+  const ud=GDATA[g]?.units[u]; if(!ud) return go("#g"+g);
+  loadAudio(g,u);
+  const tasks = ud.tests.map((t,i)=>({tid:t.id.replace(".","-"), n:i+1, id:t.id, items:learnItems(g,kind,u,t.id.replace(".","-"))})).filter(t=>t.items.length);
+  $app.innerHTML = `${lnav(`#g${g}-${kind}`,"Unitlər",g)}<h2 class="lh">${UN(u)} · ${kind==="ld"?"Definitions":"Söz öyrən"}</h2>${segDir()}
+    <button class="xbtn" data-go="${learnExam(g,kind,u)}">📝 Birbaşa imtahana keç</button>
+    <div class="grid">${tasks.map(t=>{ const k=learnedOf(kind,t.items), done=k===t.items.length;
+      return `<button class="tile ltask ${done?"ldone":""}" data-go="#g${g}-${kind}-${u}-${t.tid}"><h3>Task ${t.n}</h3><span class="sub">${t.items.length} söz · test ${t.id}</span><span class="lk">${done?"✓ ":""}Öyrənildi ${k}/${t.items.length}</span></button>`; }).join("")}</div>`;
+  bindDir(()=>pageLearnTasks(g,kind,u));
+}
+function runLearn(g,kind,u,tid){
+  const ud=GDATA[g]?.units[u]; if(!ud) return go("#g"+g);
+  loadAudio(g,u);
+  const items=learnItems(g,kind,u,tid); if(!items.length) return go(`#g${g}-${kind}`);
+  const pairs = kind==="ls"||kind==="la";
+  const back = pairs ? `#g${g}-${kind}` : `#g${g}-${kind}-${u}`, backLabel = pairs ? "Unitlər" : "Tasklar";
+  const t = tid && ud.tests.find(x=>x.id.replace(".","-")===tid);
+  const label = pairs ? `${UN(u)} · ${LK[kind].name}` : `${UN(u)} · Task ${ud.tests.indexOf(t)+1}`;
+  const exam = learnExam(g,kind,u,kind==="lw"?tid:null);
+  const byEn = {}; gradeWords(g).forEach(w=>{ byEn[w.en.toLowerCase()] ||= w; });
+  const trOf = s => { const w=byEn[String(s).toLowerCase()]; return w ? tr(w) : ""; };
+  let cur = items.findIndex(it=>!isLearned(kind,it.key));
+  if(cur<0) return done(true);
+  function nextUnlearned(from){ for(let s=1;s<=items.length;s++){ const j=(from+s)%items.length; if(!isLearned(kind,items[j].key)) return j; } return -1; }
+  function cardHtml(it){
+    const dir=store.get("dir","en");
+    if(pairs){ const [a,b]=it.p, sym = kind==="ls" ? "=" : "≠";
+      return `<div class="lcard"><div class="lwrow"><span class="lw">${esc(a)}</span><button class="lspk" data-say="${esc(a)}" aria-label="Səsləndir">🔊</button></div>
+        ${trOf(a)?`<div class="lru">${esc(trOf(a))}</div>`:""}<div class="lsym">${sym}</div>
+        <div class="lwrow"><span class="lw2">${esc(b)}</span><button class="lspk" data-say="${esc(b)}" aria-label="Səsləndir">🔊</button></div>
+        ${trOf(b)?`<div class="lru">${esc(trOf(b))}</div>`:""}<div class="lnote">${kind==="ls"?"Sinonim — eyni mənalı sözlər":"Antonim — əks mənalı sözlər"}</div></div>`; }
+    const w=it.w;
+    const en = `<div class="lwrow"><span class="lw">${esc(w.en)}</span><button class="lspk" data-say="${esc(w.en)}" aria-label="Səsləndir">🔊</button></div>${w.ipa?`<div class="lipa">[${esc(w.ipa)}]</div>`:""}`;
+    const az = `<div class="laz">${esc(tr(w))}</div><div class="lru">${esc(tr2(w))}</div>`;
+    const ex = `<div class="lexrow"><div class="lex">${highlight(w.ex,w.en)}</div><button class="lspk" data-say="${esc(w.ex)}" aria-label="Səsləndir">🔊</button></div>`;
+    if(kind==="ld"){ const df=`<div class="ldef">${esc(w.def[0].toUpperCase()+w.def.slice(1))}.</div>`;
+      return `<div class="lcard">${dir==="az" ? df+en+az : en+df+az}</div>`; }
+    return `<div class="lcard">${dir==="az" ? `<div class="laz">${esc(tr(w))}</div><div class="lru" style="margin-bottom:10px">${esc(tr2(w))}</div>`+en : en+az}${ex}</div>`;
+  }
+  function draw(say){
+    const it=items[cur], learned=isLearned(kind,it.key), k=learnedOf(kind,items);
+    $app.innerHTML = `${lnav(back,backLabel,g)}
+      <div class="lstat"><b>${esc(label)}</b><span>Öyrənildi ${k}/${items.length}</span></div>
+      <div class="bar" style="margin-bottom:14px"><i style="width:${k/items.length*100}%"></i></div>
+      ${cardHtml(it)}
+      <div class="lbtns"><button class="lb later" id="later">Sonra</button><button class="lb ok ${learned?"was":""}" id="got">${learned?"↺ Unutdum":"Öyrəndim"}</button></div>
+      <h3 class="lh3">${pairs?"Bu unitin sözləri":"Bu taskın sözləri"}</h3>
+      <div class="lchips">${items.map((x,j)=>`<button class="lchip ${j===cur?"cur":""} ${isLearned(kind,x.key)?"done":""}" data-j="${j}">${isLearned(kind,x.key)?"✓ ":""}${esc(x.chip)}</button>`).join("")}</div>
+      <button class="xbtn" style="margin-top:16px" data-go="${exam}">📝 İmtahana keç</button>`;
+    document.getElementById("later").onclick=()=>{ SFX.tap(); const j=nextUnlearned(cur); cur = j<0 ? (cur+1)%items.length : j; draw(true); };
+    document.getElementById("got").onclick=()=>{
+      if(learned){ setLearned(kind,it.key,false); SFX.tap(); return draw(false); }
+      setLearned(kind,it.key,true); SFX.ok(); const j=nextUnlearned(cur); if(j<0) return done(false); cur=j; draw(true); };
+    $app.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>{ cur=+b.dataset.j; draw(true); });
+    if(say) speak(pairs ? it.p[0] : it.w.en);
+  }
+  function done(already){
+    if(!already){ confetti(); }
+    $app.innerHTML = `${lnav(back,backLabel,g)}
+      <div class="result"><div class="emoji">🏆</div><div class="score">${items.length} / ${items.length}</div><p>${esc(label)} · hamısı öyrənildi!</p></div>
+      <button class="btn" style="background:var(--yellow);color:#1b1b33" data-go="${exam}">📝 İmtahana keç</button>
+      <button class="btn ghost" id="again">↺ Yenidən öyrən</button>
+      <button class="btn ghost" data-go="${back}">‹ ${backLabel}</button>`;
+    document.getElementById("again").onclick=()=>{ items.forEach(it=>setLearned(kind,it.key,false)); cur=0; draw(true); };
+  }
+  draw(true);
+}
+
+/* ---------- Fill the gap: tasklar ---------- */
+function gapTasks(g,u){ const ws=gapWords(g,u); if(!ws.length) return [];
+  const T=Math.max(1,Math.round(ws.length/10)), out=[]; let k=0;
+  for(let t=0;t<T;t++){ const n=Math.floor(ws.length/T)+(t<ws.length%T?1:0); out.push(ws.slice(k,k+n)); k+=n; } return out; }
+function pageGapTasks(g,u){
+  const ud=GDATA[g]?.units[u]; if(!ud) return go("#g"+g);
+  const ts=gapTasks(g,u), best=store.get("gapBest",{});
+  $app.innerHTML = `${lnav("#g"+g+"-gap","Fill the gap",g)}<h2 class="lh">${UN(u)} · Fill the gap</h2>
+    <div class="grid">${ts.map((t,i)=>{ const b=best[`${g}-${u}-${i+1}`];
+      return `<button class="tile c-sky gtask" data-go="#g${g}-gap-${u}-t${i+1}"><h3>Task ${i+1}</h3><span class="sub">${t.length} sual${b!=null?`<br>Ən yaxşı: ${b}%`:""}</span></button>`; }).join("")}</div>`;
+}
+function runGapTask(g,u,tn){
+  const ts=gapTasks(g,u), t=ts[tn-1]; if(!t) return go(`#g${g}-gap-${u}`);
+  loadAudio(g,u);
+  runMCQ({ title:`${ord(g)} sinif · Fill the gap · ${UN(u)} · Task ${tn}`, label:`Fill the gap · ${UN(u)} · Task ${tn}`,
+    items: gapItems(t, gradeWords(g)), back:`#g${g}-gap-${u}`, backLabel:`Fill the gap · ${UN(u)}`, kind:"gap", style:"gap", tlabel:`Task ${tn}`,
+    nextHref: tn<ts.length ? `#g${g}-gap-${u}-t${tn+1}` : null,
+    onDone: pct=>{ const b=store.get("gapBest",{}), k=`${g}-${u}-${tn}`; if(b[k]==null||pct>b[k]){ b[k]=pct; store.set("gapBest",b); } } });
+}
+
+/* ---------- Kartlarla öyrən ---------- */
+function cardStatus(w){ if(store.get("known",{})[wkey(w)]) return "known"; if(store.get("mistakes",{})[wkey(w)]) return "repeat"; return "new"; }
+function cardTasks(g,u){ const ud=GDATA[g].units[u]; return ud.tests.map((t,i)=>({ id:t.id.replace(".","-"), n:i+1, title:t.title, words:unitWords(g,u).filter(w=>w.t===t.id) })); }
+function pageCardTasks(g,u){
+  const ud=GDATA[g]?.units[u]; if(!ud) return go("#g"+g);
+  const tasks=cardTasks(g,u), all=unitWords(g,u), kAll=all.filter(w=>cardStatus(w)==="known").length;
+  $app.innerHTML = `${nav("#g"+g+"-cards", "Unitlər")}
+    <h2>🃏 Kartlarla öyrən</h2><p class="sec-desc" style="margin-top:6px">${UN(u)} · ${esc(ud.title)}. Karta bax, toxun — arxasında tərcümə və nümunə var. Bildinsə <b>«✓ Bildim»</b>, bilmədinsə <b>«↻ Təkrar etməliyəm»</b> bas. Hamısını bildiyin task <b style="color:#7fb0ff">mavi</b> olur.</p>
+    ${tasks.map(t=>{ const k=t.words.filter(w=>cardStatus(w)==="known").length, done=k===t.words.length;
+      return `<button class="ctask ${done?"done":""}" data-go="#g${g}-cards-${u}-${t.id}"><div><b>Task ${t.n}</b><span>${esc(t.title)}</span></div><em>${k}/${t.words.length}</em></button>`; }).join("")}
+    <button class="ctask ${kAll===all.length?"done":""}" data-go="#g${g}-cards-${u}-all"><div><b>Bütün unit</b><span>${all.length} kart</span></div><em>${kAll}/${all.length}</em></button>`;
+}
+function pageCardDeck(g,u,tid){
+  const ud=GDATA[g]?.units[u]; if(!ud) return go("#g"+g);
+  loadAudio(g,u);
+  const tasks=cardTasks(g,u), t = tid==="all" ? {n:"", title:"Bütün unit", words:unitWords(g,u)} : tasks.find(x=>x.id===tid);
+  if(!t) return go(`#g${g}-cards-${u}`);
+  const back=`#g${g}-cards-${u}`, label = tid==="all" ? `${UN(u)}` : `Task ${t.n}`;
+  let deck=[...t.words], i=0; const requeued=new Set();
+  const knownCount=()=>t.words.filter(w=>cardStatus(w)==="known").length;
+  const ST={new:["Yeni","#2fa84f"], known:["Bildim ✓","#3b6fd8"], repeat:["Təkrar","#d98a00"]};
+  function draw(){
+    const w=deck[i], st=ST[cardStatus(w)];
+    $app.innerHTML = `<div class="nav"><button class="pill cnav" data-go="${back}">‹ Tasklar</button><button class="pill home cnav2" data-go="#home">⌂ Ana menyu</button></div>
+      <div class="chead"><span class="ctitle">Kartlar · ${esc(label)}</span><div class="cbar"><i style="width:${i/deck.length*100}%"></i></div></div>
+      <div class="cstats"><b>${i+1} / ${deck.length}</b><span class="cknown">✓ ${knownCount()}</span></div>
+      <div class="flip lc" id="fc"><div class="in">
+        <div class="face cfront"><span class="cchip">${UN(u)}</span><span class="cst" style="color:${st[1]}">${st[0]}</span>
+          <div class="cw">${esc(w.en)}</div>${w.ipa?`<div class="cipa">[${esc(w.ipa)}]</div>`:""}
+          <button class="cspk" data-say="${esc(w.en)}" aria-label="Səsləndir">🔊</button>
+          <div class="chint">Tərcüməsi nədir? Karta toxun</div></div>
+        <div class="face cback"><span class="cchip">${posAz(w.pos)}</span>
+          <div class="cw" style="font-size:30px">${esc(tr(w))}</div><div class="cru">${esc(tr2(w))}</div>
+          <div class="cex" data-say="${esc(w.ex)}">🔊 ${highlight(w.ex,w.en)}</div>
+          <div class="chint">Yenidən çevirmək üçün toxun</div></div>
+      </div></div>
+      <div class="cbtns"><button class="cb rep" id="rep">↻ Təkrar etməliyəm</button><button class="cb ok" id="kn">✓ Bildim</button></div>
+      <div class="cbtns"><button class="cb prev" id="pv" ${i===0?"disabled":""}>‹ Əvvəlki</button><button class="cb next" id="nx">Növbəti ›</button></div>`;
+    document.getElementById("fc").onclick=e=>{ if(!e.target.closest("[data-say]")) e.currentTarget.classList.toggle("on"); };
+    document.getElementById("pv").onclick=()=>{ if(i>0){ i--; draw(); } };
+    document.getElementById("nx").onclick=()=>next();
+    document.getElementById("kn").onclick=()=>{ const s=store.get("known",{}); s[wkey(w)]=1; store.set("known",s); removeMistake(w); SFX.ok(); next(); };
+    document.getElementById("rep").onclick=()=>{ const s=store.get("known",{}); delete s[wkey(w)]; store.set("known",s); addMistake(w); SFX.tap();
+      if(!requeued.has(wkey(w))){ requeued.add(wkey(w)); deck.push(w); } next(); };
+    speak(w.en);
+  }
+  function next(){ if(i<deck.length-1){ i++; draw(); } else done(); }
+  function done(){
+    const k=knownCount(), n=t.words.length, all=k===n; if(all){ SFX.ok(); confetti(); }
+    const rest=t.words.filter(w=>cardStatus(w)!=="known");
+    $app.innerHTML = `<div class="nav"><button class="pill cnav" data-go="${back}">‹ Tasklar</button><button class="pill home cnav2" data-go="#home">⌂ Ana menyu</button></div>
+      <div class="result"><div class="emoji">${all?"🏆":"💪"}</div><div class="score">${k} / ${n}</div><p>${esc(label)} · bildiyin kartlar</p></div>
+      ${rest.length?`<button class="btn orange" id="again">↻ Bilmədiklərimi təkrar et (${rest.length})</button>`:`<p class="sec-desc" style="text-align:center">🎉 Bu taskın bütün kartlarını bilirsən!</p>`}
+      <button class="btn ghost" id="restart">Bütün kartlara yenidən bax</button>
+      <button class="btn ghost" data-go="${back}">‹ Tasklara qayıt</button>`;
+    const a=document.getElementById("again"); if(a) a.onclick=()=>{ deck=[...rest]; i=0; requeued.clear(); draw(); };
+    document.getElementById("restart").onclick=()=>{ deck=[...t.words]; i=0; requeued.clear(); draw(); };
+  }
+  draw();
+}
+
+/* =========================================================
+   TEST MÜHƏRRİKİ (çoxseçimli)
+   item: {lbl, q, qmd, qsub, say, extra, opts[], ans, w, after}
+   ========================================================= */
+function runMCQ({title, label, items, back, dir, kind, style, tlabel, nextHref, backLabel, onDone}){
+  const miss=[];
+  if(!items.length){ $app.innerHTML = `${nav(back)}<div class="empty">Bu bölmədə hələ sual yoxdur.</div>`; return; }
+  let i=0, ok=0, bad=0, locked=false;
+  const statHtml = ()=>`<span>${i+1} / ${items.length}</span><span class="g">✓ ${ok}</span><span class="r">✗ ${bad}</span>`;
+  function draw(){
+    const it = items[i];
+    const head = style==="gap" ? `${lnav(back,backLabel||"Geri",GDATA[items[0]?.w?.g]?items[0].w.g:"")}
+      <div class="ghead"><span class="gtl">${esc(tlabel)}</span><div class="gbar"><i style="width:${(i+1)/items.length*100}%"></i></div><b class="gnum">${i+1} / ${items.length}</b></div>
+      <div class="gok">✓ ${ok}</div>` : `${nav(back)}
+      <div class="qhead"><h2>${esc(label)}</h2><div class="bar"><i style="width:${i/items.length*100}%"></i></div></div>
+      <div class="stats">${statHtml()}</div>`;
+    $app.innerHTML = `${head}
+      <div class="qcard ${style==="gap"?"gq":""}"><div class="lbl">${esc(it.lbl)}</div><div class="w ${it.qmd?"md":""}">${it.q}</div>${it.qsub?`<div class="pos">${esc(it.qsub)}</div>`:""}
+        ${it.say?`<button class="play" data-say="${esc(it.say)}">🔊</button>`:""}${it.extra||""}</div>
+      <div>${it.opts.map((o,k)=>`<button class="opt ${style==="gap"?"gopt":""}" data-k="${k}"><span class="k">${"ABCDE"[k]}</span>${esc(o)}</button>`).join("")}</div>
+      <button class="idk" id="idk">🤔 Əmin deyiləm</button>`;
+    if(it.say) speak(it.say);
+    if(style==="gap"){ const id=document.getElementById("idk"); if(id) id.style.display="none"; }
+    const btns=[...$app.querySelectorAll(".opt")];
+    const finish = picked=>{
+      if(locked) return; locked=true;
+      btns.forEach(b=>b.disabled=true); btns[it.ans].classList.add("ok");
+      if(picked===it.ans){ ok++; good(); confetti(); if(it.w){ removeMistake(it.w); addKnown(it.w); } }
+      else { bad++; wrong(); if(picked>=0) btns[picked].classList.add("bad","shake"); if(it.w) addMistake(it.w); miss.push(it.key || (it.w&&it.w.en) || "Sual "+(i+1)); }
+      if(it.after) setTimeout(()=>speak(it.after), 550);
+      const gl=$app.querySelector(".gapline"); if(gl && it.fill){ gl.textContent=it.fill; gl.classList.add(picked===it.ans?"ok":"bad"); }
+      if(style==="gap") $app.querySelector(".gok").textContent="✓ "+ok; else $app.querySelector(".stats").innerHTML = statHtml();
+      document.getElementById("idk").outerHTML = `<button class="btn orange" id="nx">${i<items.length-1?"Növbəti →":"Nəticəyə bax →"}</button>`;
+      document.getElementById("nx").onclick=next;
+      if(picked===it.ans && !it.after) setTimeout(()=>{ if(document.getElementById("nx") && locked) next(); }, 900);
+    };
+    btns.forEach(b=>b.onclick=()=>finish(+b.dataset.k));
+    document.getElementById("idk").onclick=()=>finish(-1);
+  }
+  function next(){ locked=false; i++; if(i<items.length) draw(); else done(); }
+  function done(){
+    const pct = Math.round(ok/items.length*100);
+    const r = { t:Date.now(), kind:kind||"vocab", title, dir, dirL: dir?dirLabel(dir):"", ok, total:items.length, pct, miss:[...new Set(miss)] };
+    saveResult(r); if(onDone) onDone(pct);
+    if(style==="gap"){
+      const msg = pct===100?"Bravo! Əla nəticə!":pct>=80?"Çox yaxşı!":pct>=60?"Yaxşı nəticə!":pct>=40?"Pis deyil!":"Yenidən cəhd et!";
+      const sub = `${ok} / ${items.length} doğru cavab. `+(bad===0?"Bütün cavablar doğrudur.":`${bad} səhv cavab var.`);
+      $app.innerHTML = `${lnav(back,backLabel||"Geri",items[0]?.w?.g||"")}
+        <div class="gres"><div class="gt">${esc(tlabel)}</div><div class="gpct">${pct}%</div><h3>${msg}</h3><p>${sub}</p></div>
+        ${nextHref?`<button class="btn" style="background:var(--yellow);color:#1b1b33" data-go="${nextHref}">Növbəti task →</button>`:""}
+        <button class="btn orange" id="again">↻ Yenidən</button>
+        ${sendBtn([r])}
+        <button class="btn ghost" data-go="${back}">‹ Tasklar</button>`;
+      if(pct>=70) confetti(); document.getElementById("again").onclick=()=>render(); return;
+    }
+    const emoji = pct>=90?"🏆":pct>=70?"🌟":pct>=50?"👍":"💪";
+    $app.innerHTML = `${nav(back)}
+      <div class="result"><div class="emoji">${emoji}</div><div class="score">${ok} / ${items.length}</div><p>${esc(title)} · ${pct}%</p></div>
+      <button class="btn orange" id="again">↻ Yenidən</button>
+      ${sendBtn([r])}`;
+    if(pct>=70) confetti();
+    document.getElementById("again").onclick=()=>render();
+  }
+  draw();
+}
+function pickOpts(correct, pool, n, keyFn){
+  const seen = new Set([keyFn(correct)]); const out=[];
+  for(const x of shuffle(pool)){ const k=keyFn(x); if(!seen.has(k)){ seen.add(k); out.push(x); } if(out.length>=n) break; }
+  const opts = shuffle([correct, ...out]); return { opts, ans: opts.indexOf(correct) };
+}
+function vocabItems(words, pool, dir){
+  return shuffle(words).map(w=>{
+    const samePos = pool.filter(x=>x.pos===w.pos); const p = samePos.length>=6 ? samePos : pool;
+    const {opts, ans} = pickOpts(w, p, 3, x=> dir==="en"? tr(x) : x.en);
+    return { lbl:"Tərcüməni seçin", q: esc(dir==="en"? w.en : tr(w)), qsub: (dir==="en"&&w.ipa?"/"+w.ipa+"/ · ":"")+posAz(w.pos),
+      say: dir==="en"? w.en : null, after: dir==="az"? w.en : null,
+      extra: dir==="en"? `<div class="sent" data-say="${esc(w.ex)}">${highlight(w.ex,w.en)} 🔊</div>`:"",
+      opts: opts.map(x=> dir==="en"? tr(x) : x.en), ans, w };
+  });
+}
+function pairItems(pairs, allPairs, label){
+  const seen=new Set(); pairs = pairs.filter(([a])=>!seen.has(a)&&seen.add(a));
+  return shuffle(pairs).map(([a,b])=>{
+    const bad = new Set(allPairs.filter(p=>p[0]===a||p[1]===a).map(p=>p[1]).concat([a,b]));
+    const pool = allPairs.map(p=>p[1]).filter(x=>!bad.has(x));
+    const opts = shuffle([b, ...shuffle([...new Set(pool)]).slice(0,3)]);
+    return { lbl:label, q: esc(a), say:a, opts, ans: opts.indexOf(b), after:null, key:a };
+  });
+}
+function defItems(words, pool){
+  return shuffle(words.filter(w=>w.def && w.pos!=="phrase")).map(w=>{
+    const samePos = pool.filter(x=>x.pos===w.pos && x.def);
+    const {opts, ans} = pickOpts(w, samePos.length>=6?samePos:pool, 4, x=>x.en.toLowerCase());
+    return { lbl:"Tərifə uyğun sözü seçin", q: esc(w.def[0].toUpperCase()+w.def.slice(1)+"."), qmd:true, qsub: posAz(w.pos), opts: opts.map(x=>x.en), ans, w, after: w.en };
+  });
+}
+function gapOf(w){ const m = new RegExp("(?<![A-Za-z])"+w.en.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?![A-Za-z])","i").exec(w.ex); return (w.pos==="phrase"||!m)?null:[w.ex.slice(0,m.index), w.ex.slice(m.index+w.en.length)]; }
+const GAPD = window.GAP || {};
+function gapWords(g,u){ const L=GAPD[g]?.[u]; if(!L) return unitWords(g,u).filter(gapOf);
+  return L.map(([en,ds])=>{ const w=unitWords(g,u).find(x=>x.en===en); return w && gapOf(w) ? Object.assign({},w,{gapD:ds}) : null; }).filter(Boolean); }
+function gapItems(words, pool){
+  return shuffle(words.filter(gapOf)).map(w=>{
+    const [a,b] = gapOf(w);
+    const samePos = pool.filter(x=>x.pos===w.pos && x.pos!=="phrase");
+    let opts, ans;
+    if(w.gapD){ opts=shuffle([w.en, ...w.gapD]); ans=opts.indexOf(w.en); return { lbl:"Boşluğa uyğun sözü seçin", q: esc(a)+"<span class='gapline'></span>"+esc(b), qmd:true, opts, ans, w, after: w.ex, fill: w.en }; }
+    ({opts, ans} = pickOpts(w, samePos.length>=6?samePos:pool.filter(x=>x.pos!=="phrase"), 4, x=>x.en.toLowerCase()));
+    return { lbl:"Boşluğa uyğun sözü seçin", q: esc(a)+"<span class='gapline'></span>"+esc(b), qmd:true, opts: opts.map(x=>x.en), ans, w, after: w.ex, fill: w.en };
+  });
+}
+const limit = (a,n)=>a.slice(0,n);
+
+/* ---------- Bölmə səhifələri ---------- */
+function pageSection(g, kind, u){
+  const isAll = u==="all", us = isAll ? unitsOf(g) : [ +u ];
+  const words = us.flatMap(x=>unitWords(g,x)), pool = gradeWords(g);
+  const back = "#g"+g+"-"+kind, uname = isAll ? "Hamısı" : UN(u);
+  const d = GDATA[g];
+  if(kind==="syn"||kind==="ant"){
+    const src = kind==="syn" ? d.syn : d.ant;
+    const pairs = us.flatMap(x=>src[x]||[]), allP = Object.values(src).flat();
+    let items = pairItems(pairs, allP, kind==="syn"?"Sinonimi seçin":"Antonimi seçin");
+    if(isAll) items = limit(items,20);
+    return runMCQ({ title:`${ord(g)} sinif · ${kind==="syn"?"Synonyms":"Antonyms"} · ${uname}`, label:(kind==="syn"?"Synonyms":"Antonyms")+" · "+uname, items, back, kind });
+  }
+  if(kind==="def"){ let items = defItems(words, pool); if(isAll) items=limit(items,20);
+    return runMCQ({ title:`${ord(g)} sinif · Definitions · ${uname}`, label:"Definitions · "+uname, items, back, kind:"def" }); }
+  if(kind==="gap"){ let items = gapItems(us.flatMap(x=>gapWords(g,x)), pool); items = limit(items, isAll?20:12);
+    return runMCQ({ title:`${ord(g)} sinif · Fill the gap · ${uname}`, label:"Fill the gap · "+uname, items, back, backLabel:"Fill the gap", kind:"gap", style:"gap", tlabel:uname }); }
+  if(kind==="make") return runMake(g, words, back, `${ord(g)} sinif · Make Up · ${uname}`, isAll?15:10);
+}
+
+/* ---------- Make Up (cümlə qur) ---------- */
+function runMake(g, words, back, title, n){
+  const miss=[];
+  const items = shuffle(words.filter(w=>w.ex.split(" ").length>=3 && w.ex.split(" ").length<=9)).slice(0,n);
+  let i=0, ok=0, bad=0;
+  function draw(){
+    const w = items[i], toks = w.ex.split(" "); let picked=[], tries=0;
+    const pool = shuffle(toks.map((t,k)=>({t,k})));
+    $app.innerHTML = `${nav(back)}
+      <div class="qhead"><h2>Make Up</h2><div class="bar"><i style="width:${i/items.length*100}%"></i></div></div>
+      <div class="stats"><span>${i+1} / ${items.length}</span><span class="g">✓ ${ok}</span><span class="r">✗ ${bad}</span></div>
+      <div class="qcard"><div class="lbl">Cümləni qurun</div><div class="w md">${esc(w.en)} — ${esc(tr(w))}</div><div class="pos">Sözlərə toxunaraq düzgün ardıcıllıqla düz</div></div>
+      <div class="slot" id="slot"></div><div class="chips" id="chips"></div><div id="fb"></div>
+      <button class="btn orange" id="chk">Yoxla</button>`;
+    const slot=document.getElementById("slot"), chips=document.getElementById("chips");
+    function paint(){
+      slot.innerHTML = picked.map((p,j)=>`<button class="chip" data-j="${j}">${esc(p.t)}</button>`).join("");
+      chips.innerHTML = pool.map((p,j)=>`<button class="chip ${picked.includes(p)?"used":""}" data-p="${j}">${esc(p.t)}</button>`).join("");
+      slot.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>{ picked.splice(+b.dataset.j,1); slot.className="slot"; paint(); });
+      chips.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{ const p=pool[+b.dataset.p]; if(!picked.includes(p)){ picked.push(p); paint(); } });
+    }
+    paint();
+    document.getElementById("chk").onclick=()=>{
+      if(picked.length<toks.length){ toast("Bütün sözləri yerləşdir"); return; }
+      const right = picked.map(p=>p.t).join(" ")===w.ex;
+      const fb = document.getElementById("fb");
+      if(right){ ok++; good(); confetti(); slot.className="slot ok"; setTimeout(()=>speak(w.ex),550); fb.innerHTML=""; removeMistake(w); }
+      else { tries++; wrong(); slot.className="slot bad shake"; if(tries<2){ toast("Yenə cəhd et 🙂"); return; } bad++; addMistake(w); miss.push(w.en); fb.innerHTML=`<div class="fix">✅ ${esc(w.ex)}</div>`; setTimeout(()=>speak(w.ex),650); }
+      const b = document.getElementById("chk"); b.textContent = i<items.length-1?"Növbəti →":"Nəticəyə bax →";
+      b.onclick = ()=>{ i++; if(i<items.length) draw(); else done(); };
+    };
+  }
+  function done(){
+    const pct=Math.round(ok/items.length*100); const r={t:Date.now(),kind:"make",title,ok,total:items.length,pct,miss}; saveResult(r);
+    $app.innerHTML = `${nav(back)}<div class="result"><div class="emoji">${pct>=70?"🌟":"💪"}</div><div class="score">${ok} / ${items.length}</div><p>${esc(title)} · ${pct}%</p></div>
+      <button class="btn orange" id="again">↻ Yenidən</button>${sendBtn([r])}`;
+    if(pct>=70) confetti(); document.getElementById("again").onclick=()=>render();
+  }
+  if(!items.length){ $app.innerHTML = `${nav(back)}<div class="empty">Sual yoxdur.</div>`; return; }
+  draw();
+}
+
+/* ---------- Make Up Sentences ---------- */
+const MK = window.MAKEUP || {};
+const MK_PER = 10;
+function mkTasks(g,u){ const a=(MK[g]&&MK[g][u])||[]; const t=[]; for(let i=0;i<a.length;i+=MK_PER) t.push(a.slice(i,i+MK_PER)); return t; }
+function mkParse(line){ const [en,az,ru]=line.split("||").map(x=>x.trim()); const parts=en.split(" | ").map(x=>x.trim()); return {parts, sent:parts.join(" "), az, ru}; }
+function pageMakeUnits(g){
+  const us=Object.keys(MK[g]||{}).map(Number);
+  $app.innerHTML = `${nav("#g"+g, ord(g)+" sinif")}<h2 style="font-size:30px">Make Up Sentences</h2>
+    <p class="sec-desc" style="margin-top:8px;font-size:15.5px">Hissələri düzgün ardıcıllıqla seçib cümlə qur. “İpucu” cümlənin tərcüməsini göstərir.</p>
+    <div class="grid">${us.map((u,i)=>{ const ts=mkTasks(g,u), n=ts.reduce((a,t)=>a+t.length,0);
+      return `<button class="tile ${UNIT_COLORS[i%8]}" data-go="#g${g}-make-${u}"><h3>${UN(u)}</h3><span class="sub">${ts.length} task · ${n} cümlə</span></button>`; }).join("")}</div>`;
+}
+function pageMakeTasks(g,u){
+  const ts=mkTasks(g,u); if(!ts.length) return go("#g"+g+"-make");
+  const best=store.get("mkBest",{});
+  $app.innerHTML = `<div class="nav"><button class="pill cnav" data-go="#g${g}-make">‹ Make Up Sentences</button><button class="pill home cnav2" data-go="#home">⌂ Ana menyu</button></div>
+    <h2 style="font-size:28px;margin:6px 0 14px">${UN(u)} · Make Up Sentences</h2>
+    <div class="grid">${ts.map((t,i)=>{ const b=best[`${g}-${u}-${i+1}`];
+      return `<button class="tile" style="background:#b8a6f0" data-go="#g${g}-make-${u}-t${i+1}"><h3>Task ${i+1}</h3><span class="sub">${t.length}${b!=null?` <span class="best">Ən yaxşı: ${b}%</span>`:" cümlə"}</span></button>`; }).join("")}</div>`;
+}
+function runMakeUp(g,u,tn){
+  const ts=mkTasks(g,u), raw=ts[tn-1]; if(!raw) return go(`#g${g}-make-${u}`);
+  loadAudio(g,u);
+  const items=shuffle(raw.map(mkParse)), back=`#g${g}-make-${u}`;
+  let i=0, clean=0, miss=[];
+  function draw(){
+    const it=items[i]; let picked=[], tries=0, hint=false, solved=false;
+    let pool=shuffle(it.parts.map((t,k)=>({t,k}))); let guard=0;
+    while(pool.map(p=>p.k).join()===it.parts.map((_,k)=>k).join() && guard++<10) pool=shuffle(pool);
+    function paint(state){
+      const full=picked.length===it.parts.length;
+      $app.innerHTML = `<div class="nav"><button class="pill cnav" data-go="${back}">‹ Make Up · ${UN(u)}</button><button class="pill home cnav2" data-go="#home">⌂ Ana menyu</button></div>
+        <div class="mkhead"><span class="ctitle">Task ${tn}</span><div class="cbar"><i style="width:${(i+(solved?1:0))/items.length*100}%"></i></div><b>${i+1} / ${items.length}</b></div>
+        <span class="cknown">✓ ${clean}</span>
+        <div class="mkcard"><div class="lbl">HİSSƏLƏRİ DÜZGÜN ARDICILLIQLA SEÇİN</div>
+          <div class="mkslot ${state||""}" id="slot">${picked.length?picked.map((p,j)=>`<button class="mkc" data-j="${j}">${esc(p.t)}</button>`).join(""):`<span class="ph">Hissələrə ardıcıl bas...</span>`}</div>
+          ${hint?`<div class="mkhint">${sec()==="ru"?"🇷🇺 "+esc(it.ru):"🇦🇿 "+esc(it.az)}</div>`:""}</div>
+        ${solved?`<div class="mkok">✓ Düzdür!</div><div class="mksent"><span>${esc(it.sent)}</span><button class="cspk" style="margin:0;flex:none" data-say="${esc(it.sent)}">🔊</button></div>
+            <button class="btn orange" id="nx" style="margin-top:16px">${i<items.length-1?"Növbəti cümlə →":"Nəticəyə bax →"}</button>`
+          : state==="reveal"?`<div class="mkbad">Düzgün cavab:</div><div class="mksent"><span>${esc(it.sent)}</span><button class="cspk" style="margin:0;flex:none" data-say="${esc(it.sent)}">🔊</button></div>
+            <button class="btn orange" id="nx" style="margin-top:16px">${i<items.length-1?"Növbəti cümlə →":"Nəticəyə bax →"}</button>`
+          : `<div class="mkchips">${pool.map((p,j)=>`<button class="mkc ${picked.includes(p)?"used":""}" data-p="${j}">${esc(p.t)}</button>`).join("")}</div>
+            ${state==="bad"?`<div class="mkbad">✗ Səhvdir, yenidən cəhd et</div>`:""}
+            <div class="mkbtns">${!hint?`<button class="mkb" id="hint">💡 İpucu</button>`:""}${picked.length&&!full?`<button class="mkb" id="clr">↺ Təmizlə</button>`:""}</div>`}`;
+      const nx=document.getElementById("nx"); if(nx) nx.onclick=()=>{ i++; if(i<items.length) draw(); else done(); };
+      if(solved||state==="reveal") return;
+      $app.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{ const p=pool[+b.dataset.p]; if(picked.includes(p)) return; picked.push(p); SFX.tap(); check(); });
+      $app.querySelectorAll("[data-j]").forEach(b=>b.onclick=()=>{ picked.splice(+b.dataset.j,1); paint(); });
+      const h=document.getElementById("hint"); if(h) h.onclick=()=>{ hint=true; paint(); };
+      const c=document.getElementById("clr"); if(c) c.onclick=()=>{ picked=[]; paint(); };
+    }
+    function check(){
+      if(picked.length<it.parts.length){ paint(); return; }
+      const ok = picked.map(p=>p.t).join(" ")===it.sent;
+      if(ok){ solved=true; if(tries===0) clean++; good(); confetti(); paint("ok"); setTimeout(()=>speak(it.sent),500); return; }
+      tries++; wrong(); if(tries===1) miss.push(it.sent);
+      if(tries>=3){ paint("reveal"); setTimeout(()=>speak(it.sent),600); return; }
+      paint("bad"); setTimeout(()=>{ if(!solved){ picked=[]; paint(); } },1100);
+    }
+    paint();
+  }
+  function done(){
+    const pct=Math.round(clean/items.length*100);
+    const r={t:Date.now(),kind:"make",title:`${ord(g)} sinif · ${UN(u)} · Task ${tn}`,ok:clean,total:items.length,pct,miss:[...new Set(miss)]}; saveResult(r);
+    const b=store.get("mkBest",{}), k=`${g}-${u}-${tn}`; b[k]=Math.max(b[k]||0,pct); store.set("mkBest",b);
+    if(pct>=70){ good(); confetti(); }
+    $app.innerHTML = `<div class="nav"><button class="pill cnav" data-go="${back}">‹ Make Up · ${UN(u)}</button><button class="pill home cnav2" data-go="#home">⌂ Ana menyu</button></div>
+      <div class="result"><div class="emoji">${pct>=90?"🏆":pct>=70?"🌟":"💪"}</div><div class="score">${clean} / ${items.length}</div><p>Task ${tn} · ilk cəhddə düz qurulan cümlələr · ${pct}%</p></div>
+      <button class="btn orange" id="again">↻ Yenidən</button>${sendBtn([r])}<button class="btn ghost" data-go="${back}">‹ Tasklara qayıt</button>`;
+    document.getElementById("again").onclick=()=>render();
+  }
+  draw();
+}
+
+/* ---------- Reading ---------- */
+function pageReadList(g){
+  const R = GDATA[g].reading||{};
+  $app.innerHTML = `${nav("#g"+g, ord(g)+" sinif")}<h2>📚 Reading · Mətnlər</h2>
+    <p class="sec-desc" style="margin-top:6px">Mətni oxu, 🔊 ilə dinlə, sonra suallara cavab ver.</p>
+    ${Object.entries(R).map(([u,r])=>`<button class="row c-pink" data-go="#g${g}-read-${u}"><span class="ic">📄</span><div><b>${esc(r.title)}</b><span>${UN(u)} · ${r.q.length} sual</span></div><span class="arr">›</span></button>`).join("")}`;
+}
+function pageRead(g,u){
+  const r = GDATA[g].reading?.[u]; if(!r) return go("#g"+g+"-read");
+  loadAudio(g,u);
+  $app.innerHTML = `${nav("#g"+g+"-read","Mətnlər")}<h2>${esc(r.title)}</h2><p class="sec-desc" style="margin-top:4px">${UN(u)}</p>
+    <div class="text">${esc(r.text)}</div>
+    <button class="btn ghost" data-say="${esc(r.text)}">🔊 Mətni dinlə</button>
+    <button class="btn orange" id="startq">Suallara keç →</button>`;
+  document.getElementById("startq").onclick=()=>{
+    const items = r.q.map(([q,opts,ans])=>({lbl:"Mətnə görə cavab verin", q:esc(q), qmd:true, opts, ans}));
+    runMCQ({ title:`${ord(g)} sinif · Reading · ${r.title}`, label:"Reading · Unit "+u, items, back:"#g"+g+"-read-"+u, kind:"read" });
+  };
+}
+
+/* ---------- PDF Lüğət ---------- */
+function pageDict(g){
+  const us = unitsOf(g); let sel = store.get("dictSel","all");
+  function draw(){
+    const list = sel==="all" ? us : [ +sel ];
+    const chips = `<button data-s="all" class="${sel==="all"?"on":""}">📕 Bütün lüğət · ${gradeWords(g).length}</button>`+
+      us.map(u=>`<button data-s="${u}" class="${String(sel)===String(u)?"on":""}">${UN(u)} · ${unitWords(g,u).length}</button>`).join("");
+    const body = list.map(u=>`<h2 class="sec-title">${UN(u)} <span class="muted" style="font-size:16px">${unitWords(g,u).length} söz</span></h2>
+      <div class="dict">${[...unitWords(g,u)].sort((a,b)=>a.en.localeCompare(b.en)).map(w=>`<div class="drow"><div style="flex:1"><div class="en">${esc(w.en)} ${w.ipa?`<small>/${esc(w.ipa)}/</small>`:""}</div>
+        <div class="tr">${esc(tr(w))} · ${esc(tr2(w))}</div></div><button class="spk" data-say="${esc(w.en)}">🔊</button></div>`).join("")}</div>`).join("");
+    $app.innerHTML = `${nav("#g"+g, ord(g)+" sinif")}<h2>📕 PDF Lüğət</h2>
+      <p class="sec-desc" style="margin-top:6px">Əvvəl siyahıya bax, bəyənsən PDF yüklə: söz, transkripsiya, azərbaycanca və rusca tərcümə. Çap pəncərəsində <b>“PDF kimi saxla”</b> seçin.</p>
+      <div class="chipsel">${chips}</div><button class="btn lime" id="pdf">⬇ PDF yüklə${sel==="all"?"":" · Unit "+sel}</button>${body}`;
+    $app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{ sel=b.dataset.s; store.set("dictSel",sel); draw(); });
+    document.getElementById("pdf").onclick=()=>{
+      document.getElementById("printArea").innerHTML = `<h1>${esc(SITE_TITLE)} · ${ord(g)} sinif lüğəti${sel==="all"?"":" · Unit "+sel}</h1>`+
+        list.map(u=>`<h2>${UN(u)} · ${esc(GDATA[g].units[u].title)}</h2><table><tr><th>#</th><th>Word</th><th>Transcription</th><th>Azərbaycanca</th><th>Русский</th></tr>`+
+          [...unitWords(g,u)].sort((a,b)=>a.en.localeCompare(b.en)).map((w,k)=>`<tr><td>${k+1}</td><td><b>${esc(w.en)}</b></td><td>${w.ipa?"/"+esc(w.ipa)+"/":""}</td><td>${esc(w.az)}</td><td>${esc(w.ru)}</td></tr>`).join("")+`</table>`).join("");
+      try{ window.print(); }catch(e){ toast("Çap bu pəncərədə açılmır — saytı brauzerdə açın"); }
+    };
+  }
+  draw();
+}
+
+/* ---------- Səhvlərim ---------- */
+function pageMistakes(g){
+  const ws = mistakeWords(g==="all"?null:g);
+  const back = g==="all" ? "#all" : "#g"+g;
+  $app.innerHTML = `${nav(back)}<h2>❗ Səhvlərim</h2><p class="sec-desc" style="margin-top:6px">Səhv cavab verdiyin sözlər burada toplanır. Testdə düz cavab versən, siyahıdan silinir.</p>
+    ${ws.length ? `<button class="btn orange" id="prac">Səhvlərimdən test (${ws.length})</button><div style="height:14px"></div>`+
+      ws.map(w=>`<div class="word"><div><div class="en">${esc(w.en)}</div><div class="az">${esc(tr(w))}</div><span class="tag">${ord(w.g)} sinif · ${UN(w.u)}</span></div><button class="spk" data-say="${esc(w.en)}">🔊</button></div>`).join("")
+      : `<div class="empty">🎉 Hələ səhv yoxdur!</div>`}`;
+  const p = document.getElementById("prac");
+  if(p) p.onclick=()=>runMCQ({ title:(g==="all"?"Bütün siniflər":ord(g)+" sinif")+" · Səhvlərim", label:"Səhvlərim", items: vocabItems(ws, g==="all"?allWords():gradeWords(g), store.get("dir","en")), back, dir:store.get("dir","en") });
+}
+
+/* =========================================================
+   ALL IN ONE
+   ========================================================= */
+function pageAll(){
+  const known = Object.keys(store.get("known",{})).length, mist = mistakeWords(null).length, n = allWords().length;
+  const syn = grades().flatMap(g=>Object.values(GDATA[g].syn||{}).flat()).length;
+  const ant = grades().flatMap(g=>Object.values(GDATA[g].ant||{}).flat()).length;
+  const def = allWords().filter(w=>w.def&&w.pos!=="phrase").length;
+  $app.innerHTML = `${nav()}
+    <h1 style="font-size:40px;background:linear-gradient(90deg,#3cc4b4,#f2a65a,#ef7a6a,#f0a6b8);-webkit-background-clip:text;background-clip:text;color:transparent">All in One</h1>
+    <p class="sec-desc">Bütün siniflərin sözləri bir yerdə · ${n} söz</p>
+    <div class="pills"><span class="me alt">Bildiklərim ${known}</span><span class="me" style="background:#ffe0e3;color:#8a1c2a">Səhvlərim ${mist}</span></div>
+    <div class="grid">
+      <button class="tile c-teal" data-go="#all-words"><h3>Words Exam</h3><span class="sub">Sözlər · ${n} söz · 20 sual</span></button>
+      <button class="tile c-lime" data-go="#all-syn"><h3>Synonyms Exam</h3><span class="sub">Sinonimlər · ${syn}</span></button>
+      <button class="tile c-pink" data-go="#all-ant"><h3>Antonyms Exam</h3><span class="sub">Antonimlər · ${ant}</span></button>
+      <button class="tile c-orange" data-go="#all-def"><h3>Definitions Exam</h3><span class="sub">Təriflər · ${def}</span></button>
+      <button class="tile wide c-red" data-go="#gall-mistakes"><h3>Səhvlərim</h3><span class="sub">${mist} söz · təkrar et</span></button>
+    </div>`;
+}
+function pageAllExam(kind){
+  const all = allWords(), dir = store.get("dir","en");
+  if(kind==="words") return runMCQ({ title:"All in One · Words Exam", label:"Words Exam", items: limit(vocabItems(all, all, dir),20), back:"#all", dir });
+  if(kind==="def") return runMCQ({ title:"All in One · Definitions Exam", label:"Definitions", items: limit(defItems(all, all),20), back:"#all", kind:"def" });
+  const src = kind==="syn" ? "syn" : "ant";
+  const pairs = grades().flatMap(g=>Object.values(GDATA[g][src]||{}).flat());
+  runMCQ({ title:`All in One · ${src==="syn"?"Synonyms":"Antonyms"} Exam`, label: src==="syn"?"Synonyms":"Antonyms", items: limit(pairItems(pairs, pairs, src==="syn"?"Sinonimi seçin":"Antonimi seçin"),20), back:"#all", kind:src });
+}
+
+/* =========================================================
+   SÖZ AXTAR, LİNKLƏR, RƏY
+   ========================================================= */
+function pageSearch(){
+  const q0 = store.get("lastSearch","");
+  $app.innerHTML = `${nav()}<h2>🔎 Söz axtar</h2><p class="sec-desc" style="margin-top:6px">Söz hansı sinifdə, hansı unitdədir? İngiliscə, azərbaycanca və ya rusca yazın.</p>
+    <div class="search"><span>🔎</span><input id="q" placeholder="Məs: family və ya ailə" value="${esc(q0)}" autocomplete="off"></div><div id="res"></div>`;
+  const inp = document.getElementById("q"), res = document.getElementById("res");
+  function run(){
+    const q = inp.value.trim().toLowerCase(); store.set("lastSearch", inp.value);
+    if(q.length<2){ res.innerHTML = `<p class="muted" style="font-weight:700">Ən azı 2 hərf yazın.</p>`; return; }
+    const hits = allWords().filter(w=>w.en.toLowerCase().includes(q)||w.az.toLowerCase().includes(q)||w.ru.toLowerCase().includes(q)).slice(0,60);
+    res.innerHTML = hits.length ? hits.map(w=>`<div class="word"><div><div class="en">${esc(w.en)}${w.ipa?`<small>/${esc(w.ipa)}/</small>`:""}</div>
+      <div class="az">${esc(tr(w))} · ${esc(tr2(w))}</div><button class="tag" data-go="#g${w.g}-u${w.u}">${ord(w.g)} sinif · ${UN(w.u)} · ${w.t} ›</button></div>
+      <button class="spk" data-say="${esc(w.en)}">🔊</button></div>`).join("") : `<div class="empty">Tapılmadı 🤷</div>`;
+  }
+  inp.addEventListener("input", run); run();
+}
+function pageLinks(){
+  $app.innerHTML = `${nav()}<h2>🔗 Faydalı linklər</h2><p class="sec-desc" style="margin-top:6px">İngilis dilini öyrənmək üçün seçilmiş videolar və saytlar. Toxunun — yeni pəncərədə açılacaq.</p>
+    ${LINKS.map(([sec,items])=>`<h3 class="sec-title" style="font-size:14px;letter-spacing:1.5px;color:var(--muted)">${esc(sec)}</h3>`+
+      items.map(([t,d,url,type])=>`<a class="row" style="background:var(--card);color:var(--text);border-color:var(--line)" href="${esc(url)}" target="_blank" rel="noopener">
+        <span class="ic">${type==="YouTube"?"▶️":"🌐"}</span><div><b>${esc(t)}</b><span>${esc(d)}</span></div><span class="badge" style="background:${type==="YouTube"?"#d63a3a":"#2a6fd0"};color:#fff">${esc(type)}</span></a>`).join("")).join("")}`;
+}
+function pageFeedback(){
+  const draft = store.get("fbDraft","");
+  $app.innerHTML = `${nav()}<h2>💬 Rəy və təklifləriniz</h2>
+    <p class="sec-desc" style="margin-top:6px">Saytla bağlı fikrinizi, təklifinizi və ya tapdığınız səhvi yazın. Mesaj WhatsApp ilə müəllimə göndəriləcək.</p>
+    <textarea id="fb" placeholder="Fikrinizi buraya yazın...">${esc(draft)}</textarea>
+    <a class="btn green" id="send" target="_blank" rel="noopener" href="#">🟢 WhatsApp ilə göndər</a>`;
+  const ta=document.getElementById("fb"), a=document.getElementById("send");
+  const upd=()=>{ store.set("fbDraft",ta.value); a.href = waHref("💬 Rəy / təklif:\n"+ta.value.trim()); a.style.opacity = ta.value.trim()?1:.5; };
+  ta.addEventListener("input",upd); upd();
+  a.addEventListener("click",e=>{ if(!ta.value.trim()){ e.preventDefault(); toast("Əvvəlcə bir şey yazın"); } });
+}
+
+/* =========================================================
+   PARAGRAPH WRITING (süni intellektsiz)
+   ========================================================= */
+/* ---------- Addım-addım paraqraf ---------- */
+function parseUnit(str){
+  const [az, en] = str.split("||").map(x=>x.trim());
+  const pieces = en.split(" | ").map(p=>{ const m=p.match(/\[(.*?)\]/); const text=p.replace(/\[.*?\]/,"").replace(/\s+/g," ").trim();
+    return { text, words: text.split(" "), dis: m ? m[1].split("|").map(x=>x.trim()) : [] }; });
+  const segs=[]; let last=0; az.replace(/\{(\d+):([^}]*)\}/g,(m,i,t,off)=>{ if(off>last) segs.push({t:az.slice(last,off)}); segs.push({i:+i,t}); last=off+m.length; });
+  if(last<az.length) segs.push({t:az.slice(last)});
+  return { segs, pieces, text: pieces.map(p=>p.text).join(" ") };
+}
+const lab = w => w.replace(/[.,!?;:]/g,"").trim();
+function unitSentences(t){ let prevEnd="."; return t.units.map(u=>{ const p=parseUnit(u); let x=p.text; if(/[.!?]$/.test(prevEnd)) x=x[0].toUpperCase()+x.slice(1); prevEnd=x.slice(-1); return x; }); }
+
+function pagePara(){
+  const prog = store.get("paraProg",{});
+  $app.innerHTML = `${nav()}
+    <div class="phero"><h2 class="serif">✍️ Paragraph Writing</h2><p>Mövzunu seç · paraqrafı cümlə-cümlə qur</p></div>
+    <p class="sec-desc" style="font-size:15.5px">Mövzular dərslikdəki suallardandır, paraqraflar yalnız həmin sinfin dərsliyindəki sözlərlə yazılıb. Hər cümlə Azərbaycan dilində verilir. <b style="color:#ff4d4d">Qırmızı</b> hissəni ingiliscə qur: sözlərə düzgün ardıcıllıqla toxun. Cümlə addım-addım böyüyür və sən onu hər dəfə <b>başdan</b> qurursan. Sonda bütöv paraqraf alınır.</p>
+    <div class="chipsel" id="gsel"></div>
+    <div class="search"><span>🔎</span><input id="q" placeholder="Axtar: məs. family, school, nature..." autocomplete="off"></div><div id="lst"></div>
+    <button class="row" style="background:var(--card);color:var(--text);border-color:var(--line)" data-go="#para-own"><span class="ic">✏️</span><div><b>Sərbəst yazı</b><span>Öz mövzunu seç və paraqrafı özün yaz</span></div><span class="arr">›</span></button>`;
+  const inp=document.getElementById("q"), lst=document.getElementById("lst"), gsel=document.getElementById("gsel");
+  const gs=[...new Set(PARA.topics.map(t=>t.grade))].sort((a,b)=>a-b); let gf=store.get("paraGrade","all");
+  const paintG=()=>{ gsel.innerHTML=`<button data-g="all" class="${gf==="all"?"on":""}">Hamısı · ${PARA.topics.length}</button>`+gs.map(g=>`<button data-g="${g}" class="${String(gf)===String(g)?"on":""}">${ord(g)} sinif · ${PARA.topics.filter(t=>t.grade===g).length}</button>`).join("");
+    gsel.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{ gf=b.dataset.g; store.set("paraGrade",gf); paintG(); run(); }); };
+  const run=()=>{ const q=inp.value.trim().toLowerCase();
+    lst.innerHTML = PARA.topics.map((t,i)=>({t,i})).filter(x=>(gf==="all"||String(x.t.grade)===String(gf))&&(!q||x.t.q.toLowerCase().includes(q))).map(({t,i})=>{
+      const p=prog[i]; return `<button class="ptopic ${p?"done":""}" data-go="#para-${i}"><span class="pnum">${i+1}</span><div><b>${esc(t.q)}</b>
+        <span>${ord(t.grade)} sinif · ${UN(t.unit)} · ${t.units.length} cümlə${p?` · <span style="color:#5ee08a">✓ ən yaxşı nəticə ${p}%</span>`:""}</span></div></button>`; }).join("") || `<div class="empty">Tapılmadı</div>`; };
+  inp.addEventListener("input",run); paintG(); run();
+}
+
+function pageParaBuild(ti){
+  const t = PARA.topics[ti]; if(!t) return go("#para");
+  loadScript("paragraph-audio.js");
+  const units = t.units.map(parseUnit), sents = unitSentences(t);
+  const totalSteps = units.reduce((a,u)=>a+u.pieces.length,0);
+  let ui=0, si=0, clean=0, wrong=0;
+  const head = ()=>`<div class="nav" style="justify-content:space-between;align-items:center"><button class="pill" data-go="#para">‹ Mövzular</button><span class="muted" style="font-weight:800">${ord(t.grade)} sinif · ${UN(t.unit)}</span></div>
+    <div class="qtitle serif">${esc(t.q)}</div>`;
+  const stat = ()=>`<span class="st">✅<b>${clean}</b> &nbsp;❌<b>${wrong}</b></span>`;
+  function azHtml(u, upto){ return u.segs.map(s=> s.i && s.i<=upto ? `<span class="hl">${esc(s.t)}</span>` : esc(s.t)).join(""); }
+  function drawStep(){
+    const u = units[ui], P = u.pieces, piece = P[si];
+    const chunks = P.slice(0,si).map(p=>({l:lab(p.text), chunk:true}));
+    const words = piece.words.map(w=>({l:lab(w)})).filter(x=>x.l);
+    const expected = [...chunks, ...words].map(x=>x.l);
+    const pool = shuffle([...chunks, ...words, ...piece.dis.map(d=>({l:d, dis:true}))]);
+    let pos=0, stepWrong=0;
+    $app.innerHTML = `${head()}<div class="bcard">
+      <div class="bhead"><span>Cümlə ${ui+1} / ${units.length}</span>${stat()}</div>
+      <div class="pbar"><i style="width:${ui/units.length*100}%"></i></div>
+      <div class="azbox"><small>AZƏRBAYCANCA CÜMLƏ</small><div>${azHtml(u, si+1)}</div></div>
+      <div class="stepinfo">Addım ${si+1} / ${P.length} · <b>Qırmızı</b> hissəni ingiliscə ${si?"başdan qur — əvvəl qurduğun hissələr hazır blokdadır:":"qur:"}</div>
+      <div class="bslot" id="slot"></div>
+      <div class="bchips" id="pool">${pool.map((c,k)=>`<button class="bchip ${c.chunk?"chunk":""}" data-k="${k}">${esc(c.l)}</button>`).join("")}</div></div>`;
+    const slot=document.getElementById("slot"), btns=[...document.querySelectorAll("#pool .bchip")];
+    btns.forEach(b=>b.onclick=()=>{
+      const c = pool[+b.dataset.k];
+      if(c.l===expected[pos]){
+        b.classList.add("used"); const d=document.createElement("span"); d.className="bchip"+(c.chunk?" chunk":""); d.textContent=c.l; slot.appendChild(d);
+        btns.forEach(x=>x.classList.remove("hint","wrong")); pos++; if(pos<expected.length) SFX.tap();
+        if(pos===expected.length) stepDone(stepWrong===0);
+      } else {
+        wrong++; stepWrong++; window.wrong(); b.classList.add("wrong","shake"); setTimeout(()=>b.classList.remove("shake","wrong"),450);
+        document.querySelector(".bhead .st").outerHTML = stat();
+        if(stepWrong>=3){ const h=btns.find(x=>!x.classList.contains("used") && pool[+x.dataset.k].l===expected[pos]); if(h) h.classList.add("hint"); }
+      }
+    });
+  }
+  function stepDone(isClean){
+    if(isClean) clean++;
+    document.querySelector(".bhead .st").outerHTML = stat();
+    if(si < units[ui].pieces.length-1){ SFX.step(); si++; setTimeout(drawStep, 450); return; }
+    good(); confetti(); setTimeout(()=>speak(sents[ui]), 600);
+    $app.innerHTML = `${head()}<div class="bcard">
+      <div class="bhead"><span>Cümlə ${ui+1} / ${units.length}</span>${stat()}</div>
+      <div class="pbar"><i style="width:${(ui+1)/units.length*100}%"></i></div>
+      <div class="azbox"><small>AZƏRBAYCANCA CÜMLƏ</small><div>${azHtml(units[ui], 99)}</div></div>
+      <div class="done-sent" data-say="${esc(sents[ui])}">✅ ${esc(sents[ui])} 🔊</div>
+      <button class="btn orange" id="nx">${ui<units.length-1?"Növbəti cümlə →":"Paraqrafı gör →"}</button></div>`;
+    document.getElementById("nx").onclick=()=>{ ui++; si=0; if(ui<units.length) drawStep(); else finish(); };
+  }
+  function finish(){
+    const pct = Math.round(clean/totalSteps*100), text = sents.join(" ");
+    const medal = pct>=85?"🥇":pct>=65?"🥈":"🥉";
+    const r = { t:Date.now(), kind:"para", title:`${ord(t.grade)} sinif · ${UN(t.unit)} · ${t.q}`, ok:clean, total:totalSteps, pct, note:`Səhvsiz addımlar: ${clean}/${totalSteps} · Səhv toxunuş: ${wrong}` }; saveResult(r);
+    const pr = store.get("paraProg",{}); pr[ti] = Math.max(pr[ti]||0, pct); store.set("paraProg",pr);
+    if(pct>=65) confetti();
+    $app.innerHTML = `${head()}<div class="bcard" style="text-align:center">
+      <div style="font-size:64px">${medal}</div><h2 style="font-size:28px;margin:4px 0 6px">Paraqraf hazırdır!</h2>
+      <p class="muted" style="font-weight:800;font-size:15.5px">Səhvsiz qurulan addımlar: <b style="color:var(--text)">${clean} / ${totalSteps}</b> (${pct}%) · Səhv toxunuş: ${wrong}</p>
+      <div class="ptext" style="text-align:left">${esc(text)}</div>
+      <button class="btn ghost" id="listen">🔊 Paraqrafı dinlə</button>
+      ${sendBtn([r])}
+      <button class="btn orange" id="again" disabled style="opacity:.45;filter:grayscale(.6);cursor:not-allowed">🔒 Yenidən qur</button>
+      <div class="muted" id="againhint" style="font-weight:800;font-size:13.5px;margin-top:6px">Yenidən qurmaq üçün əvvəlcə nəticəni müəllimə göndər.</div>
+      <button class="btn ghost" data-go="#para">‹ Mövzulara qayıt</button></div>`;
+    document.getElementById("listen").onclick=()=>loadScript("paragraph-audio.js").then(()=>playSeq(sents));
+    const ag=document.getElementById("again");
+    $app.querySelector("[data-send]").addEventListener("click",()=>{ ag.disabled=false; ag.removeAttribute("style"); ag.textContent="↻ Yenidən qur"; const h=document.getElementById("againhint"); if(h) h.remove(); });
+    ag.onclick=()=>{ if(!ag.disabled) render(); };
+  }
+  drawStep();
+}
+
+function pageParaTopic(idx){
+  const own = true, t = {q:store.get("ownTopic",""), kw:[]};
+  const drafts = store.get("paraDrafts",{}), key = "own";
+  $app.innerHTML = `${nav("#para", "Paragraph")}
+    <h2 style="color:#7fe0e6">Paragraph Writing</h2><p class="sec-desc" style="margin-top:2px">${own?"Öz mövzun":"Mövzu "+(+idx+1)}</p>
+    ${own?`<div class="field" style="margin-bottom:12px"><input id="ot" placeholder="Mövzunu ingiliscə yaz..." value="${esc(t.q)}"></div>`:`<div class="phead">${esc(t.q)}</div>`}
+    <details><summary>🧭 Paraqrafı belə qur</summary><ol class="plan">${PARA.plan.map(([h,x])=>`<li><b>${esc(h)}:</b> ${x}</li>`).join("")}
+      <li>✏️ Ən azı <b>${PARA.minWords} söz</b> yaz.</li></ol></details>
+    ${t.kw.length?`<details><summary>🔑 Açar sözlər · Key words</summary><div class="kw">${t.kw.map(([e,a])=>`<div data-say="${esc(e)}"><b>${esc(e)}</b><span>${esc(a)}</span></div>`).join("")}</div></details>`:""}
+    <h3 style="font-size:16px;margin:14px 0 8px">✍️ Paraqrafını yaz</h3>
+    <textarea id="tx" placeholder="Paraqrafını burada ingilis dilində yaz...">${esc(drafts[key]||"")}</textarea>
+    <div class="wc" id="wc"></div>
+    <button class="btn teal" id="chk">✅ Yoxla (Check)</button><div id="out"></div>`;
+  const tx=document.getElementById("tx"), wc=document.getElementById("wc"), ot=document.getElementById("ot");
+  const words=()=>tx.value.trim().split(/\s+/).filter(Boolean);
+  const upd=()=>{ const n=words().length; wc.innerHTML = n>=PARA.minWords?`<span style="color:var(--ok)">${n} söz ✓</span>`:`<span style="color:var(--bad)">${n} söz · ən azı ${PARA.minWords} söz yaz</span>`;
+    const d=store.get("paraDrafts",{}); d[key]=tx.value; store.set("paraDrafts",d); };
+  tx.addEventListener("input",upd); upd();
+  if(ot) ot.addEventListener("input",()=>store.set("ownTopic",ot.value));
+  document.getElementById("chk").onclick=()=>{
+    const text = tx.value.trim(), n = words().length, low = text.toLowerCase();
+    const topic = own ? (ot.value.trim()||"Öz mövzum") : t.q;
+    const sents = text.split(/(?<=[.!?])\s+/).filter(s=>s.trim().length>2);
+    const caps = sents.filter(s=>/^[A-Z"']/.test(s.trim())).length;
+    const linkers = PARA.linkers.filter(l=>low.includes(l));
+    const kwUsed = t.kw.filter(([e])=>low.includes(e.toLowerCase().split(" ")[0])).length;
+    const checks = [
+      ["Söz sayı (ən azı "+PARA.minWords+")", n, n>=PARA.minWords],
+      ["Cümlə sayı (ən azı 6)", sents.length, sents.length>=6],
+      ["Böyük hərflə başlayan cümlələr", caps+" / "+sents.length, sents.length && caps===sents.length],
+      ["Keçid sözləri (Firstly, However...)", linkers.length, linkers.length>=3],
+      ["Nəticə cümləsi (In conclusion)", low.includes("in conclusion")?"var":"yoxdur", low.includes("in conclusion")],
+    ];
+    if(t.kw.length) checks.push(["Açar sözlərdən istifadə", kwUsed+" / "+t.kw.length, kwUsed>=3]);
+    const score = checks.filter(c=>c[2]).length;
+    if(score===checks.length) confetti();
+    document.getElementById("out").innerHTML = `<div class="checks"><h3>Avtomatik yoxlama: <span style="color:${score===checks.length?"var(--ok)":"var(--yellow)"}">${score} / ${checks.length}</span></h3>
+      ${checks.map(([a,b,c])=>`<div><span>${c?"✅":"⚠️"} ${esc(a)}</span><span>${esc(b)}</span></div>`).join("")}
+      <p class="muted" style="font-size:12.5px;font-weight:700;margin-top:8px">Bu sadə yoxlamadır: qrammatikanı və məzmunu müəllim yoxlayır.</p></div>
+      <a class="btn green" target="_blank" rel="noopener" href="${waHref("✍️ Paragraph Writing\nMövzu: "+topic+"\nSöz sayı: "+n+" · Avtomatik yoxlama: "+score+"/"+checks.length+"\n\n"+text)}">🟢 Paraqrafı müəllimə göndər</a>
+      <button class="btn ghost" id="cp">📋 Kopyala</button>`;
+    document.getElementById("cp").onclick=async()=>{ try{ await navigator.clipboard.writeText(text); toast("Kopyalandı ✓"); }catch(e){ toast("Kopyalamaq alınmadı"); } };
+    document.getElementById("out").scrollIntoView({behavior:"smooth"});
+  };
+}
+
+/* =========================================================
+   QEYDİYYAT, NƏTİCƏLƏR
+   ========================================================= */
+function fmtPhone(d){ d=String(d||"").slice(0,9); return [d.slice(0,2),d.slice(2,5),d.slice(5,7),d.slice(7,9)].filter(Boolean).join(" "); }
+function pageRegister(){
+  const p = store.get("profile",null) || {first:"",last:"",age:"",role:"student",phone:"",cls:"",section:""};
+  let role = p.role || "student", section = p.section || ""; const first = !store.get("profile",null), upgrade = !first && !p.section;
+  $app.innerHTML = `${first?"":nav()}
+    <div class="reg"><h2>Qeydiyyat 👋</h2>
+      <p class="lead">${first?"Başlamaq üçün bir dəfə qeydiyyatdan keçin. Bu məlumatlar bir daha soruşulmayacaq.":upgrade?"Yeni xanalar əlavə olundu: <b>sinif</b> və <b>bölmə</b>. Zəhmət olmasa doldurun.":"Məlumatlarınızı dəyişə bilərsiniz."}</p>
+      <label for="f1">Ad</label><div class="field"><input id="f1" autocomplete="given-name" maxlength="30" value="${esc(p.first)}" placeholder="Adınız"></div>
+      <label for="f2">Soyad</label><div class="field"><input id="f2" autocomplete="family-name" maxlength="30" value="${esc(p.last)}" placeholder="Soyadınız"></div>
+      <label for="f3">Yaşınız</label><div class="field"><input id="f3" inputmode="numeric" maxlength="2" value="${esc(p.age)}" placeholder="məs. 11"></div>
+      <label>Siz kimsiniz?</label><div class="roles"><button data-role="student">🎓 Şagird</button><button data-role="teacher">👩‍🏫 Müəllim</button></div>
+      <label for="f5" id="clsLbl">Sinif</label><div class="field" id="clsBox"><input id="f5" maxlength="4" value="${esc(p.cls||"")}" placeholder="məs. 5E" autocapitalize="characters"></div>
+      <label>Bölmə</label><div class="roles"><button data-sec="az">🇦🇿 Azərbaycan</button><button data-sec="ru">🇷🇺 Rus</button></div>
+      <label for="f4">Telefon nömrəsi</label><div class="field"><span class="pre">+994</span><input id="f4" type="tel" inputmode="numeric" autocomplete="tel-national" value="${esc(fmtPhone(p.phone))}" placeholder="55 123 45 67"></div>
+      <div class="err" id="err"></div>
+      <button class="btn violet" id="save" style="margin-top:22px">${first?"Qeydiyyatdan keç və başla →":"Yadda saxla ✓"}</button>
+      <p class="privacy">🔒 Məlumatlar yalnız bu telefonda saxlanılır.</p></div>`;
+  $app.querySelectorAll(".reg input").forEach(i=>i.addEventListener("input",()=>{ document.getElementById("err").textContent=""; }));
+  const rb=[...$app.querySelectorAll("[data-role]")]; const paint=()=>rb.forEach(b=>b.classList.toggle("on",b.dataset.role===role));
+  const sb=[...$app.querySelectorAll("[data-sec]")]; const paintS=()=>sb.forEach(b=>b.classList.toggle("on",b.dataset.sec===section));
+  sb.forEach(b=>b.onclick=()=>{ section=b.dataset.sec; paintS(); document.getElementById("err").textContent=""; }); paintS();
+  const paintC=()=>{ document.getElementById("clsLbl").textContent = role==="teacher" ? "Sinif (istəyə görə)" : "Sinif"; };
+  rb.forEach(b=>b.onclick=()=>{ role=b.dataset.role; paint(); paintC(); }); paint(); paintC();
+  document.getElementById("f5").addEventListener("input",e=>{ e.target.value=e.target.value.toUpperCase().replace(/\s+/g,""); });
+  const ph=document.getElementById("f4"); ph.addEventListener("input",()=>{ ph.value=fmtPhone(ph.value.replace(/\D/g,"").replace(/^994/,"").replace(/^0/,"")); });
+  document.getElementById("f3").addEventListener("input",e=>{ e.target.value=e.target.value.replace(/\D/g,""); });
+  document.getElementById("save").onclick=()=>{
+    const v=id=>document.getElementById(id).value.trim(); const f1=v("f1"),f2=v("f2"),age=v("f3"),phone=v("f4").replace(/\D/g,""); const err=document.getElementById("err");
+    if(!f1||!f2) return err.textContent="Ad və soyadı yazın.";
+    if(!/^\d{1,2}$/.test(age)||+age<5) return err.textContent="Yaşı düzgün yazın.";
+    const cls=v("f5").toUpperCase();
+    if(role==="student" && !/^(5|6|7|8|9|10|11)[A-ZƏÇĞİÖŞÜ]?$/.test(cls)) return err.textContent="Sinfi düzgün yazın (məs. 5E).";
+    if(!section) return err.textContent="Bölməni seçin: Azərbaycan və ya Rus.";
+    if(!/^\d{9}$/.test(phone)) return err.textContent="Telefon nömrəsi 9 rəqəm olmalıdır (məs. 55 123 45 67).";
+    store.set("profile",{first:f1,last:f2,age,role,phone,cls,section}); go("#home");
+  };
+}
+function pageVerify(){
+  $app.innerHTML = `${nav()}<h2>🔐 Nəticəni yoxla</h2>
+    <p class="sec-desc" style="margin-top:6px">Şagirdin WhatsApp-da göndərdiyi mesajı bütövlükdə kopyalayıb aşağıya yapışdırın. Mesajda bir hərf belə dəyişdirilibsə, kod uyğun gəlməyəcək.</p>
+    <textarea id="vt" placeholder="📚 5–11 English Vocabulary · ..."></textarea>
+    <button class="btn teal" id="vb">Yoxla</button><div id="vr"></div>`;
+  document.getElementById("vb").onclick=()=>{
+    const t=document.getElementById("vt").value.replace(/\r/g,""); const m=t.match(/🔐\s*Kod:\s*([0-9A-F]{4}-[0-9A-F]{4})/i);
+    const out=document.getElementById("vr");
+    if(!m){ out.innerHTML=`<div class="empty">Mesajda "🔐 Kod" sətri tapılmadı.</div>`; return; }
+    const body=t.slice(t.indexOf("📚")>=0?t.indexOf("📚"):0, t.indexOf(m[0])).replace(/\n+$/,"");
+    const okk = makeCode(body)===m[1].toUpperCase();
+    if(okk) SFX.ok(); else wrong();
+    out.innerHTML = okk ? `<div class="fix" style="margin-top:12px">✅ Kod düzgündür — nəticə dəyişdirilməyib.</div>`
+      : `<div class="fix" style="margin-top:12px;border-color:var(--bad);background:rgba(255,93,108,.15)">❌ Kod uyğun gəlmir — mesaj dəyişdirilib və ya tam kopyalanmayıb.</div>`;
+  };
+}
+function pageResults(){
+  const res = store.get("results",[]);
+  $app.innerHTML = `${nav()}<h2>📊 Nəticələrim</h2><p class="sec-desc" style="margin-top:6px">Son testlərin nəticələri bu telefonda saxlanılır.</p>
+    ${res.length?sendBtn(unsentResults(), res.some(r=>!r.sent)?`🟢 Göndərilməmiş nəticələri göndər (${res.filter(r=>!r.sent).length})`:"🟢 Son nəticələri müəllimə göndər")+`<div style="height:14px"></div>`+
+      res.map(r=>{ const d=new Date(r.t); return `<div class="word"><div><div class="en">${r.ok} / ${r.total} · ${r.pct}%</div><div class="az">${(r.title||"").includes(KIND_NAMES[r.kind||"vocab"])?"":esc(KIND_NAMES[r.kind||"vocab"])+" · "}${esc(r.title)}${r.dirL?" · "+esc(r.dirL):(r.dir?" · "+(r.dir==="en"?"EN→AZ":"AZ→EN"):"")}${r.sent?" · ✓ göndərilib":""}</div>
+        <div class="ex" style="font-style:normal">${ddmmyyyy(r.t)} ${hhmm(r.t)}</div></div></div>`; }).join(""):`<div class="empty">Hələ test edilməyib.</div>`}`;
+}
+
+/* =========================================================
+   MARŞRUTLAR
+   ========================================================= */
+function render(){
+  const h = location.hash.replace(/^#/,"");
+  window.scrollTo(0,0);
+  try{ window.speechSynthesis && speechSynthesis.cancel(); }catch(e){}
+  if(_au){ try{_au.pause();}catch(e){} }
+  let m;
+  document.body.classList.toggle("warm", /^para/.test(h));
+  if(h==="register" || !store.get("profile",null) || !store.get("profile",{}).section) return pageRegister();
+  if(h==="results") return pageResults();
+  if(h==="verify") return pageVerify();
+  if(h==="search") return pageSearch();
+  if(h==="links") return pageLinks();
+  if(h==="feedback") return pageFeedback();
+  if(h==="para" || h==="para-list") return pagePara();
+  if(h==="para-own") return pageParaTopic("own");
+  if((m=h.match(/^para-(\d+)$/))) return pageParaBuild(+m[1]);
+  if(h==="all") return pageAll();
+  if((m=h.match(/^all-(words|syn|ant|def)$/))) return pageAllExam(m[1]);
+  if(h==="gall-mistakes") return pageMistakes("all");
+  if((m=h.match(/^g(\d+)-mistakes$/))) return pageMistakes(+m[1]);
+  if((m=h.match(/^g(\d+)-u(\d+)-quiz-([\w-]+)$/))){
+    const g=+m[1],u=+m[2],tid=m[3], ud=GDATA[g]?.units[u]; if(!ud) return go("#home");
+    loadAudio(g,u);
+    const pool=unitWords(g,u), t = tid==="all" ? {id:UN(u),title:"Hamısı",words:pool} : (()=>{ const x=ud.tests.find(x=>x.id.replace(".","-")===tid); return x&&{id:x.id,title:x.title,words:pool.filter(w=>w.t===x.id)}; })();
+    if(!t) return go("#g"+g+"-u"+u);
+    const dir = store.get("dir","en");
+    return runMCQ({ title:`${ord(g)} sinif · ${UN(u)} · ${t.id} ${t.title}`, label:`${t.id} · ${dirLabel(dir)}`, items: vocabItems(t.words, pool, dir), back:`#g${g}-u${u}`, dir });
+  }
+  if((m=h.match(/^g(\d+)-u(\d+)$/))) return pageUnit(+m[1],+m[2]);
+  if((m=h.match(/^g(\d+)-learn-(\d+)$/))) return pageLearn(+m[1],+m[2]);
+  if((m=h.match(/^g(\d+)-(lw|ld)-(\d+)-([\w-]+)$/))) return runLearn(+m[1],m[2],+m[3],m[4]);
+  if((m=h.match(/^g(\d+)-(ls|la)-(\d+)$/))) return runLearn(+m[1],m[2],+m[3],null);
+  if((m=h.match(/^g(\d+)-(lw|ld)-(\d+)$/))) return pageLearnTasks(+m[1],m[2],+m[3]);
+  if((m=h.match(/^g(\d+)-(lw|ls|la|ld)$/))) return pageLearnUnits(+m[1],m[2]);
+  if((m=h.match(/^g(\d+)-cards-(\d+)$/))) return pageCardTasks(+m[1],+m[2]);
+  if((m=h.match(/^g(\d+)-cards-(\d+)-([\w-]+)$/))) return pageCardDeck(+m[1],+m[2],m[3]);
+  if((m=h.match(/^g(\d+)-read-(\d+)$/))) return pageRead(+m[1],+m[2]);
+  if((m=h.match(/^g(\d+)-make-(\d+)-t(\d+)$/))) return runMakeUp(+m[1],+m[2],+m[3]);
+  if((m=h.match(/^g(\d+)-make-(\d+)$/))) return pageMakeTasks(+m[1],+m[2]);
+  if((m=h.match(/^g(\d+)-gap-(\d+)-t(\d+)$/))) return runGapTask(+m[1],+m[2],+m[3]);
+  if((m=h.match(/^g(\d+)-gap-(\d+)$/))) return pageGapTasks(+m[1],+m[2]);
+  if((m=h.match(/^g(\d+)-(syn|ant|def|gap|make)-(\d+|all)$/))) return pageSection(+m[1],m[2],m[3]);
+  if((m=h.match(/^g(\d+)-(\w+)$/))){
+    const g=+m[1], k=m[2]; if(!GDATA[g]) return go("#home");
+    const d=GDATA[g];
+    if(k==="syn") return pageChooser(g,"syn","Synonyms","Sözün sinonimini (eyni mənalı sözü) seçin.",u=>`${(d.syn[u]||[]).length} sual`);
+    if(k==="ant") return pageChooser(g,"ant","Antonyms","Sözün antonimini (əks mənalı sözü) seçin.",u=>`${(d.ant[u]||[]).length} sual`);
+    if(k==="def") return pageChooser(g,"def","Definitions","Tərifi oxuyun və uyğun sözü seçin.",u=>`${unitWords(g,u).filter(w=>w.def&&w.pos!=="phrase").length} sual`);
+    if(k==="gap") return pageChooser(g,"gap","Fill the gap","Cümlədəki boşluğa uyğun sözü seçin. Hər unitin sualları yalnız həmin unitin sözlərindəndir.",u=>`${gapTasks(g,u).length} task · ${gapWords(g,u).length} sual`);
+    if(k==="make") return pageMakeUnits(g);
+    if(k==="learn") return pageLearnHub(g);
+    if(k==="cards") return pageChooser(g,"cards","🃏 Kartlarla öyrən","Karta bax, toxun — arxasında tərcümə və nümunə var.",u=>`${unitWords(g,u).length} kart`);
+    if(k==="read") return pageReadList(g);
+    if(k==="dict") return pageDict(g);
+  }
+  if((m=h.match(/^g(\d+)$/))) return pageGrade(+m[1]);
+  pageHome();
+}
+render();
+</script>
+</body>
+</html>
