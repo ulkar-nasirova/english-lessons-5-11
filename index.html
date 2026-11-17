@@ -621,7 +621,8 @@ function pageHome(){
     <div class="pills"><button class="me" data-go="${prof.role==="teacher"?"#teacher":"#register"}">${prof.role==="teacher"?"👩‍🏫":"👤"} ${esc(prof.first+" "+prof.last)} ✏️</button>
       <button class="me alt" id="share">🔗 Proqramın linki</button>
       <button class="me" id="sfxbtn" style="background:#fff3d6;color:#5a3b00">${store.get("sfx",true)?"🔔 Effekt səsləri: açıq":"🔕 Effekt səsləri: bağlı"}</button>
-      <button class="me" id="vibbtn" style="background:#ffe3e3;color:#7a1f1f">${store.get("vib",true)?"📳 Vibrasiya: açıq":"📴 Vibrasiya: bağlı"}</button></div>
+      <button class="me" id="vibbtn" style="background:#ffe3e3;color:#7a1f1f">${store.get("vib",true)?"📳 Vibrasiya: açıq":"📴 Vibrasiya: bağlı"}</button>
+      ${prof.role==="teacher"?`<button class="me" id="tlogout" style="background:#ffd6d6;color:#8a1c1c">🚪 Müəllim rejimindən çıx</button>`:""}</div>
     <div class="hero"><h2>Sözləri öyrən, test et, yadda saxla!</h2><p>Dərslikdəki hər unitin sözləri, kartlar və testlər bir yerdə.</p><div class="big">📚</div></div>
     ${(()=>{const N=noteOfDay(); return `<div class="note"><small>💡 Günün qeydi · Bilirdinizmi?</small> <span style="font-size:13px;opacity:.7">${esc(N.date)}</span><br>${esc(N.text)}</div>`;})()}
     <div class="covers">${covers}
@@ -635,6 +636,7 @@ function pageHome(){
     <button class="row" style="background:#d63a3a;color:#fff;border-color:#8a1c1c" data-go="#feedback"><span class="ic">💬</span><div><b>Rəy və təklifləriniz</b><span>Yazın — müəllimə WhatsApp ilə gedir</span></div><span class="arr">›</span></button>
     <button class="row" style="background:#d4f2ee;border-color:#2a9d93" data-go="#links"><span class="ic">🔗</span><div><b>Faydalı linklər</b><span>YouTube videoları və saytlar</span></div><span class="badge" style="background:#0f4d48;color:#fff">YOUTUBE</span></button>
     <div class="foot">© ${new Date().getFullYear()} · ${esc(SITE_TITLE)}</div>`;
+  const tl=document.getElementById("tlogout"); if(tl) tl.onclick=()=>{ if(tl.dataset.sure){ store.set("profile",null); go("#register"); } else { tl.dataset.sure=1; tl.textContent="🚪 Əminsiniz? Yenə toxunun"; tl.style.background="#d63a3a"; tl.style.color="#fff"; } };
   const nr=document.getElementById("nores"); if(nr) nr.onclick=()=>toast("Hələ nəticə yoxdur — əvvəlcə bir test et 🙂");
   document.getElementById("sfxbtn").onclick=()=>{ store.set("sfx",!store.get("sfx",true)); if(store.get("sfx",true)) SFX.ok(); pageHome(); };
   document.getElementById("vibbtn").onclick=()=>{ store.set("vib",!store.get("vib",true)); if(store.get("vib",true)) buzz(); pageHome(); };
